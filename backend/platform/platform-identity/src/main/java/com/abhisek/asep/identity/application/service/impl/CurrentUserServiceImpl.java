@@ -19,7 +19,8 @@ public class CurrentUserServiceImpl implements CurrentUserService {
 
     @Override
     public CurrentUserResponse currentUser() {
-
+        String username = SecurityUtils.currentUsername();
+        System.out.println("Current username = " + username);
         User user = userRepository.findByUsername(SecurityUtils.currentUsername()).
                 orElseThrow(() -> new UserNotFoundException("Current user not found."));
 

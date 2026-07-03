@@ -29,6 +29,7 @@
         <module>platform-ai-core</module>
         <module>platform-compiler</module>
         <module>platform-identity</module>
+        <module>platform-project</module>
 
     </modules>
 
