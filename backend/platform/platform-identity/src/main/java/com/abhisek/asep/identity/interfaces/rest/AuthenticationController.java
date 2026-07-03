@@ -14,6 +14,9 @@ import com.abhisek.asep.identity.application.service.RefreshTokenService;
 import com.abhisek.asep.identity.application.usecase.LoginUseCase;
 import com.abhisek.asep.identity.application.usecase.RegisterUserUseCase;
 import com.abhisek.asep.identity.infrastructure.security.SecurityUtils;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +26,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Tag(
+        name = "Authentication",
+        description = "Authentication and JWT APIs"
+)
 public class AuthenticationController {
 
     private final LoginUseCase loginUseCase;
@@ -32,6 +39,10 @@ public class AuthenticationController {
     private final RegisterUserUseCase registerUserUseCase;
 
     @PostMapping("/login")
+    @Operation(
+            summary = "Authenticate user",
+            description = "Authenticates user and returns access and refresh tokens."
+    )
     public ResponseEntity<ApiResponse<LoginResponse>> login(
             @Valid @RequestBody LoginRequest request) {
 
@@ -43,6 +54,10 @@ public class AuthenticationController {
         );
 
     }
+    @Operation(
+            summary = "Refresh access token",
+            description = "Generates a new access token using a refresh token."
+    )
     @PostMapping("/refresh")
     public ResponseEntity<ApiResponse<RefreshTokenResponse>> refreshToken(
             @Valid @RequestBody RefreshTokenRequest request) {
@@ -55,6 +70,10 @@ public class AuthenticationController {
         );
 
     }
+    @Operation(
+            summary = "Logout",
+            description = "Revokes the current refresh token."
+    )
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<Void>> logout() {
 
@@ -68,6 +87,11 @@ public class AuthenticationController {
         );
 
     }
+    @Operation(
+            summary = "Current user",
+            description = "Returns the authenticated user."
+    )
+    @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/me")
     public ResponseEntity<ApiResponse<CurrentUserResponse>> me() {
 
@@ -79,6 +103,10 @@ public class AuthenticationController {
         );
 
     }
+    @Operation(
+            summary = "Register new user",
+            description = "Registers a new ASEP user."
+    )
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<UserResponse>> register(
             @Valid @RequestBody RegisterUserRequest request) {
