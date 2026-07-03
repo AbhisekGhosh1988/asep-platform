@@ -1,7 +1,8 @@
-package com.abhisek.asep.identity.infrastructure.persistence.mapper;
+package com.abhisek.asep.identity.infrastructure.persistence.mapper.impl;
 
 import com.abhisek.asep.identity.domain.model.Permission;
 import com.abhisek.asep.identity.infrastructure.persistence.entity.PermissionEntity;
+import com.abhisek.asep.identity.infrastructure.persistence.mapper.PermissionPersistenceMapper;
 import org.springframework.stereotype.Component;
 
 @Component

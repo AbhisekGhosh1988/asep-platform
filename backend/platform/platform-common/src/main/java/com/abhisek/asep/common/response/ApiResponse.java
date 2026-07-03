@@ -14,10 +14,7 @@ public class ApiResponse<T> {
         this.timestamp = Instant.now();
     }
 
-    public ApiResponse(boolean success,
-                       String code,
-                       String message,
-                       T data) {
+    public ApiResponse(boolean success, String code, String message, T data) {
         this.timestamp = Instant.now();
         this.success = success;
         this.code = code;
@@ -26,30 +23,15 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> success(T data) {
-        return new ApiResponse<>(
-                true,
-                "SUCCESS",
-                "Request completed successfully",
-                data
-        );
+        return new ApiResponse<>(true, "SUCCESS", "Request completed successfully", data);
     }
 
     public static <T> ApiResponse<T> success(String message, T data) {
-        return new ApiResponse<>(
-                true,
-                "SUCCESS",
-                message,
-                data
-        );
+        return new ApiResponse<>(true, "SUCCESS", message, data);
     }
 
     public static <T> ApiResponse<T> failure(String code, String message) {
-        return new ApiResponse<>(
-                false,
-                code,
-                message,
-                null
-        );
+        return new ApiResponse<>(false, code, message, null);
     }
 
     public Instant getTimestamp() {

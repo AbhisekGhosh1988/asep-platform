@@ -1,7 +1,8 @@
-package com.abhisek.asep.identity.infrastructure.persistence.mapper;
+package com.abhisek.asep.identity.infrastructure.persistence.mapper.impl;
 
 import com.abhisek.asep.identity.domain.model.Role;
 import com.abhisek.asep.identity.infrastructure.persistence.entity.RoleEntity;
+import com.abhisek.asep.identity.infrastructure.persistence.mapper.RolePersistenceMapper;
 import org.springframework.stereotype.Component;
 
 @Component

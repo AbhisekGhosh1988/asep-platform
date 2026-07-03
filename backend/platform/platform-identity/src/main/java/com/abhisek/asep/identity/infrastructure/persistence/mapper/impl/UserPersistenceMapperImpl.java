@@ -1,7 +1,8 @@
-package com.abhisek.asep.identity.infrastructure.persistence.mapper;
+package com.abhisek.asep.identity.infrastructure.persistence.mapper.impl;
 
 import com.abhisek.asep.identity.domain.model.User;
 import com.abhisek.asep.identity.infrastructure.persistence.entity.UserEntity;
+import com.abhisek.asep.identity.infrastructure.persistence.mapper.UserPersistenceMapper;
 import org.springframework.stereotype.Component;
 
 @Component

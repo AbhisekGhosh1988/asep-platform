@@ -8,6 +8,7 @@ import com.abhisek.asep.identity.infrastructure.persistence.repository.JpaRoleRe
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -36,5 +37,22 @@ public class RoleRepositoryAdapter implements RoleRepository {
     public Optional<Role> findByRoleType(RoleType roleType) {
         return repository.findByRoleType(roleType)
                 .map(mapper::toDomain);
+    }
+
+    @Override
+    public List<Role> findAll() {
+
+        return repository.findAll()
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public void delete(Role role) {
+
+        repository.delete(
+                mapper.toEntity(role)
+        );
     }
 }

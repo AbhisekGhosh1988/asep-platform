@@ -2,6 +2,7 @@ package com.abhisek.asep.identity.domain.repository;
 
 import com.abhisek.asep.identity.domain.model.Permission;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PermissionRepository {
@@ -13,5 +14,9 @@ public interface PermissionRepository {
     Optional<Permission> findByName(String name);
 
     boolean existsByName(String name);
+
+    List<Permission> findAll();
+
+    void delete(Permission permission);
 
 }

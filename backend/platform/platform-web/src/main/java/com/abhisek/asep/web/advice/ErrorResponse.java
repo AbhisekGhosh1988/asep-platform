@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,5 +16,10 @@ public class ErrorResponse {
     private String code;
     private String message;
     private String path;
-    private List<String> errors;
+
+    /**
+     * Validation or business errors.
+     */
+    private List<?> errors;
+
 }

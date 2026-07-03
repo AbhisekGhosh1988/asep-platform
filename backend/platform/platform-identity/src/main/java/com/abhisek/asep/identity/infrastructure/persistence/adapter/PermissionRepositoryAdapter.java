@@ -7,6 +7,7 @@ import com.abhisek.asep.identity.infrastructure.persistence.repository.JpaPermis
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -44,5 +45,21 @@ public class PermissionRepositoryAdapter implements PermissionRepository {
     public boolean existsByName(String name) {
 
         return repository.existsByName(name);
+    }
+    @Override
+    public List<Permission> findAll() {
+
+        return repository.findAll()
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
+    }
+
+    @Override
+    public void delete(Permission permission) {
+
+        repository.delete(
+                mapper.toEntity(permission)
+        );
     }
 }

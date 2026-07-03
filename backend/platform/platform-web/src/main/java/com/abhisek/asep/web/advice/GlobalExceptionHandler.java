@@ -16,21 +16,59 @@ import java.util.List;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ASEPException.class)
-    public ResponseEntity<ErrorResponse> handleASEPException(ASEPException ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> handleASEPException(
+            ASEPException ex,
+            HttpServletRequest request) {
 
-        ErrorResponse response = new ErrorResponse(Instant.now(), ex.getErrorCode().getCode(),
-                ex.getMessage(), request.getRequestURI(), List.of());
+        HttpStatus status = switch (ex.getErrorCode()) {
 
-        return ResponseEntity.badRequest().body(response);
+            case USER_NOT_FOUND,
+                 ROLE_NOT_FOUND,
+                 PERMISSION_NOT_FOUND,
+                 RESOURCE_NOT_FOUND,
+                 REFRESH_TOKEN_NOT_FOUND -> HttpStatus.NOT_FOUND;
+
+            case USER_ALREADY_EXISTS,
+                 EMAIL_ALREADY_EXISTS,
+                 CONFLICT -> HttpStatus.CONFLICT;
+
+            case INVALID_CREDENTIALS,
+                 TOKEN_INVALID,
+                 TOKEN_EXPIRED,
+                 UNAUTHORIZED -> HttpStatus.UNAUTHORIZED;
+
+            case FORBIDDEN -> HttpStatus.FORBIDDEN;
+
+            case VALIDATION_FAILED,
+                 INVALID_REQUEST,
+                 BAD_REQUEST -> HttpStatus.BAD_REQUEST;
+
+            default -> HttpStatus.INTERNAL_SERVER_ERROR;
+        };
+
+        ErrorResponse response = new ErrorResponse(
+                Instant.now(),
+                ex.getErrorCode().getCode(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                List.of()
+        );
+
+        return ResponseEntity.status(status).body(response);
     }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex,
                                                           HttpServletRequest request) {
 
-        List<String> errors = ex.getBindingResult().getFieldErrors().stream().
-                map(FieldError::getDefaultMessage).toList();
-
+        List<ValidationError> errors =
+                ex.getBindingResult()
+                        .getFieldErrors()
+                        .stream()
+                        .map(field ->
+                                new ValidationError(
+                                        field.getField(),
+                                        field.getDefaultMessage()))
+                        .toList();
         ErrorResponse response = new ErrorResponse(Instant.now(), "VALIDATION_ERROR",
                 "Validation failed", request.getRequestURI(), errors);
 

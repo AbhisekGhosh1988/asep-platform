@@ -19,6 +19,14 @@ public enum ErrorCode {
     TOKEN_EXPIRED("AUTH-0004", "Token expired"),
     TOKEN_INVALID("AUTH-0005", "Invalid token"),
 
+    // Identity
+    USER_NOT_FOUND("ID-0001", "User not found"),
+    ROLE_NOT_FOUND("ID-0002", "Role not found"),
+    PERMISSION_NOT_FOUND("ID-0003", "Permission not found"),
+    USER_ALREADY_EXISTS("ID-0004", "User already exists"),
+    EMAIL_ALREADY_EXISTS("ID-0005", "Email already exists"),
+    REFRESH_TOKEN_NOT_FOUND("ID-0006", "Refresh token not found"),
+
     // AI
     AI_PROVIDER_ERROR("AI-0001", "AI provider error"),
     AI_TIMEOUT("AI-0002", "AI request timeout"),

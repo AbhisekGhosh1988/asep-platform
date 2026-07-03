@@ -8,5 +8,6 @@ public enum UserStatus {
 
     LOCKED,
 
-    PASSWORD_EXPIRED
+    PASSWORD_EXPIRED,
+    DISABLED
 }
