@@ -25,11 +25,18 @@
     <modules>
 
         <module>platform-common</module>
+
         <module>platform-web</module>
+
         <module>platform-ai-core</module>
+
         <module>platform-compiler</module>
+
         <module>platform-identity</module>
+
         <module>platform-project</module>
+
+        <module>platform-quality</module>
 
     </modules>
 

@@ -26,7 +26,9 @@
 
         <lombok.version>1.18.38</lombok.version>
         <mapstruct.version>1.6.3</mapstruct.version>
+        <spring.modulith.version>1.4.1</spring.modulith.version>
 
+        <archunit.version>1.4.1</archunit.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -52,7 +54,11 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <dependency>
+                <groupId>com.tngtech.archunit</groupId>
+                <artifactId>archunit-junit5</artifactId>
+                <version>${archunit.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
