@@ -1,0 +1,13 @@
+package com.abhisek.asep.project.domain.event;
+
+
+import com.abhisek.asep.common.event.DomainEvent;
+
+import java.time.Instant;
+
+public record ProjectUpdatedEvent(
+        String projectId,
+        String projectName,
+        Instant occurredOn
+) implements DomainEvent {
+}

@@ -1,10 +1,13 @@
 package com.abhisek.asep.project.application.service.impl;
 
 import com.abhisek.asep.common.enums.ErrorCode;
+import com.abhisek.asep.common.event.DomainEventPublisher;
 import com.abhisek.asep.common.exception.ASEPException;
 import com.abhisek.asep.project.application.dto.response.ProjectResponse;
 import com.abhisek.asep.project.application.mapper.ProjectApplicationMapper;
 import com.abhisek.asep.project.application.service.ProjectLifecycleService;
+import com.abhisek.asep.project.domain.event.ProjectActivatedEvent;
+import com.abhisek.asep.project.domain.event.ProjectArchivedEvent;
 import com.abhisek.asep.project.domain.exception.ProjectNotFoundException;
 import com.abhisek.asep.project.domain.model.Project;
 import com.abhisek.asep.project.domain.model.ProjectAction;
@@ -23,6 +26,7 @@ public class ProjectLifecycleServiceImpl implements ProjectLifecycleService {
     private final ProjectRepository repository;
     private final ProjectDomainService domainService;
     private final ProjectApplicationMapper mapper;
+    private final DomainEventPublisher eventPublisher;
 
     @Override
     public ProjectResponse executeAction(String projectId, ProjectAction action) {
@@ -31,15 +35,33 @@ public class ProjectLifecycleServiceImpl implements ProjectLifecycleService {
 
         switch (action) {
 
-            case ACTIVATE -> activate(project);
+            case ACTIVATE -> {
+                activate(project);
 
-            case DEACTIVATE -> deactivate(project);
+                eventPublisher.publish(new ProjectActivatedEvent(project.getId(), Instant.now()));
+            }
 
-            case ARCHIVE -> archive(project);
+            case DEACTIVATE -> {
+                deactivate(project);
+            }
 
-            case RESTORE -> restore(project);
+            case ARCHIVE -> {
 
-            default -> throw new ASEPException(ErrorCode.BAD_REQUEST, "Unsupported project action");
+                archive(project);
+
+                eventPublisher.publish(new ProjectArchivedEvent(project.getId(), Instant.now()));
+
+            }
+
+            case RESTORE -> {
+
+                restore(project);
+
+                eventPublisher.publish(new ProjectActivatedEvent(project.getId(), Instant.now()));
+
+            }
+
+            default -> throw new ASEPException(ErrorCode.BAD_REQUEST, "Unsupported action");
 
         }
 

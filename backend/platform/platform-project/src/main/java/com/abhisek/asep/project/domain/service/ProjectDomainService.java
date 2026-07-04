@@ -1,6 +1,7 @@
 package com.abhisek.asep.project.domain.service;
 
 import com.abhisek.asep.project.domain.model.Project;
+import com.abhisek.asep.project.domain.model.ProjectMember;
 
 public interface ProjectDomainService {
 
@@ -17,5 +18,9 @@ public interface ProjectDomainService {
     void validateArchive(Project project);
 
     void validateRestore(Project project);
+
+    void validateAddMember(Project project, ProjectMember member);
+
+    void validateRemoveMember(Project project, ProjectMember member);
 
 }

@@ -3,6 +3,8 @@ package com.abhisek.asep.project.domain.service.impl;
 import com.abhisek.asep.common.enums.ErrorCode;
 import com.abhisek.asep.common.exception.ASEPException;
 import com.abhisek.asep.project.domain.model.Project;
+import com.abhisek.asep.project.domain.model.ProjectMember;
+import com.abhisek.asep.project.domain.model.ProjectRole;
 import com.abhisek.asep.project.domain.model.ProjectStatus;
 import com.abhisek.asep.project.domain.service.ProjectDomainService;
 import org.springframework.stereotype.Service;
@@ -83,4 +85,31 @@ public class ProjectDomainServiceImpl implements ProjectDomainService {
 
     }
 
+    @Override
+    public void validateAddMember(Project project, ProjectMember member) {
+
+        if (project.getStatus() == ProjectStatus.ARCHIVED) {
+
+            throw new ASEPException(ErrorCode.BAD_REQUEST, "Cannot add members to an archived project");
+
+        }
+
+    }
+
+    @Override
+    public void validateRemoveMember(Project project, ProjectMember member) {
+
+        if (project.getStatus() == ProjectStatus.ARCHIVED) {
+
+            throw new ASEPException(ErrorCode.BAD_REQUEST, "Cannot remove members from an archived project");
+
+        }
+
+        if (member.getRole() == ProjectRole.OWNER) {
+
+            throw new ASEPException(ErrorCode.BAD_REQUEST, "Project owner cannot be removed");
+
+        }
+
+    }
 }
