@@ -20,25 +20,19 @@ public class PermissionRepositoryAdapter implements PermissionRepository {
     @Override
     public Permission save(Permission permission) {
 
-        return mapper.toDomain(
-                repository.save(
-                        mapper.toEntity(permission)
-                )
-        );
+        return mapper.toDomain(repository.save(mapper.toEntity(permission)));
     }
 
     @Override
     public Optional<Permission> findById(String id) {
 
-        return repository.findById(id)
-                .map(mapper::toDomain);
+        return repository.findById(id).map(mapper::toDomain);
     }
 
     @Override
     public Optional<Permission> findByName(String name) {
 
-        return repository.findByName(name)
-                .map(mapper::toDomain);
+        return repository.findByName(name).map(mapper::toDomain);
     }
 
     @Override
@@ -46,20 +40,16 @@ public class PermissionRepositoryAdapter implements PermissionRepository {
 
         return repository.existsByName(name);
     }
+
     @Override
     public List<Permission> findAll() {
 
-        return repository.findAll()
-                .stream()
-                .map(mapper::toDomain)
-                .toList();
+        return repository.findAll().stream().map(mapper::toDomain).toList();
     }
 
     @Override
     public void delete(Permission permission) {
 
-        repository.delete(
-                mapper.toEntity(permission)
-        );
+        repository.delete(mapper.toEntity(permission));
     }
 }

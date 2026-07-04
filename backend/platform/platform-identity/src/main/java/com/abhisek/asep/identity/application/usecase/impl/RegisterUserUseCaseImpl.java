@@ -24,8 +24,7 @@ public class RegisterUserUseCaseImpl implements RegisterUserUseCase {
             throw new DuplicateUserException("Username already exists: " + request.getUsername());
         }
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new ASEPException(ErrorCode.EMAIL_ALREADY_EXISTS,
-                    "Email already exists: " + request.getEmail());
+            throw new ASEPException(ErrorCode.EMAIL_ALREADY_EXISTS, "Email already exists: " + request.getEmail());
         }
         return userService.register(request);
     }

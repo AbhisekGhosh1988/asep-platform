@@ -21,11 +21,8 @@ public class CurrentUserServiceImpl implements CurrentUserService {
     public CurrentUserResponse currentUser() {
         String username = SecurityUtils.currentUsername();
         System.out.println("Current username = " + username);
-        User user = userRepository.findByUsername(SecurityUtils.currentUsername()).
-                orElseThrow(() -> new UserNotFoundException("Current user not found."));
+        User user = userRepository.findByUsername(SecurityUtils.currentUsername()).orElseThrow(() -> new UserNotFoundException("Current user not found."));
 
-        return CurrentUserResponse.builder().id(user.getId()).username(user.getUsername()).
-                email(user.getEmail()).roles(user.getRoles().stream().
-                        map(role -> role.getRoleType().name()).collect(Collectors.toSet())).build();
+        return CurrentUserResponse.builder().id(user.getId()).username(user.getUsername()).email(user.getEmail()).roles(user.getRoles().stream().map(role -> role.getRoleType().name()).collect(Collectors.toSet())).build();
     }
 }

@@ -15,10 +15,7 @@ public class RolePersistenceMapperImpl implements RolePersistenceMapper {
             return null;
         }
 
-        return Role.builder()
-                .id(entity.getId())
-                .roleType(entity.getRoleType())
-                .build();
+        return Role.builder().id(entity.getId()).roleType(entity.getRoleType()).build();
     }
 
     @Override
@@ -28,9 +25,6 @@ public class RolePersistenceMapperImpl implements RolePersistenceMapper {
             return null;
         }
 
-        return RoleEntity.builder()
-                .id(role.getId())
-                .roleType(role.getRoleType())
-                .build();
+        return RoleEntity.builder().id(role.getId()).roleType(role.getRoleType()).build();
     }
 }

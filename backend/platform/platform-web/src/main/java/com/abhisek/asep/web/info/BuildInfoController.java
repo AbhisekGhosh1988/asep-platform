@@ -22,7 +22,6 @@ public class BuildInfoController {
     @GetMapping
     public ApiResponse<BuildInfoResponse> info() {
 
-        return ApiResponse.success(new BuildInfoResponse(application, version,
-                System.getProperty("java.version"), SpringBootVersion.getVersion(), Instant.now()));
+        return ApiResponse.success(new BuildInfoResponse(application, version, System.getProperty("java.version"), SpringBootVersion.getVersion(), Instant.now()));
     }
 }

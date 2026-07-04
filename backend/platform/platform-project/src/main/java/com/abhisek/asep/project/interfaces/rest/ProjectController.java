@@ -2,6 +2,7 @@ package com.abhisek.asep.project.interfaces.rest;
 
 import com.abhisek.asep.common.response.ApiResponse;
 import com.abhisek.asep.project.application.dto.request.CreateProjectRequest;
+import com.abhisek.asep.project.application.dto.request.ProjectActionRequest;
 import com.abhisek.asep.project.application.dto.request.UpdateProjectRequest;
 import com.abhisek.asep.project.application.dto.response.ProjectResponse;
 import com.abhisek.asep.project.application.usecase.*;
@@ -28,12 +29,12 @@ public class ProjectController {
     private final ListProjectsUseCase listProjectsUseCase;
     private final UpdateProjectUseCase updateProjectUseCase;
     private final DeleteProjectUseCase deleteProjectUseCase;
+    private final ExecuteProjectActionUseCase executeProjectActionUseCase;
 
     @PostMapping
     @Operation(summary = "Create Project", description = "Creates a new ASEP project.")
     @SecurityRequirement(name = "Bearer Authentication")
-    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Project created successfully"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Project already exists")})
+    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Project created successfully"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Project already exists")})
     public ResponseEntity<ApiResponse<ProjectResponse>> create(
 
             @Valid @RequestBody CreateProjectRequest request) {
@@ -41,10 +42,10 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Project created successfully", createProjectUseCase.execute(request)));
 
     }
+
     @Operation(summary = "Get Project", description = "Get project by Id.")
     @SecurityRequirement(name = "Bearer Authentication")
-    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Project retrieved successfully"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Project not found")})
+    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Project retrieved successfully"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "Project not found")})
     @GetMapping("/{id}")
     public ApiResponse<ProjectResponse> get(@PathVariable String id) {
         return ApiResponse.success("Project retrieved successfully", getProjectUseCase.execute(id));
@@ -53,8 +54,7 @@ public class ProjectController {
     @GetMapping
     @Operation(summary = "Get Projects", description = "Get all projects")
     @SecurityRequirement(name = "Bearer Authentication")
-    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "All Project retrieved successfully"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No projects found")})
+    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "All Project retrieved successfully"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "204", description = "No projects found")})
     public ApiResponse<List<ProjectResponse>> list() {
         return ApiResponse.success("Projects retrieved successfully", listProjectsUseCase.execute());
     }
@@ -79,5 +79,16 @@ public class ProjectController {
         return ApiResponse.success("Project deleted successfully", null);
     }
 
+    @PostMapping("/{id}/actions")
+    @Operation(summary = "Execute Project Action", description = "Executes lifecycle actions on a project.")
+    @SecurityRequirement(name = "Bearer Authentication")
+    public ApiResponse<ProjectResponse> executeAction(
 
+            @PathVariable String id,
+
+            @Valid @RequestBody ProjectActionRequest request) {
+
+        return ApiResponse.success("Project action executed successfully", executeProjectActionUseCase.execute(id, request));
+
+    }
 }

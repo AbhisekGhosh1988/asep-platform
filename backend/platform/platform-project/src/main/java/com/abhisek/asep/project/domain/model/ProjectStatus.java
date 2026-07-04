@@ -6,6 +6,7 @@ public enum ProjectStatus {
 
     ACTIVE,
 
-    ARCHIVED
+    ARCHIVED,
+    INACTIVE
 
 }

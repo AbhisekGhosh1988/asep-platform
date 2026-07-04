@@ -30,10 +30,6 @@ public class PermissionPersistenceMapperImpl implements PermissionPersistenceMap
             return null;
         }
 
-        return PermissionEntity.builder()
-                .id(permission.getId())
-                .name(permission.getName())
-                .description(permission.getDescription())
-                .build();
+        return PermissionEntity.builder().id(permission.getId()).name(permission.getName()).description(permission.getDescription()).build();
     }
 }

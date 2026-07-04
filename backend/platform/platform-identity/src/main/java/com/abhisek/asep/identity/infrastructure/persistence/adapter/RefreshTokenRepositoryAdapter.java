@@ -11,25 +11,19 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class RefreshTokenRepositoryAdapter
-        implements RefreshTokenRepository {
+public class RefreshTokenRepositoryAdapter implements RefreshTokenRepository {
 
     private final JpaRefreshTokenRepository repository;
     private final RefreshTokenPersistenceMapper mapper;
 
     @Override
     public RefreshToken save(RefreshToken token) {
-        return mapper.toDomain(
-                repository.save(
-                        mapper.toEntity(token)
-                )
-        );
+        return mapper.toDomain(repository.save(mapper.toEntity(token)));
     }
 
     @Override
     public Optional<RefreshToken> findByToken(String token) {
-        return repository.findByToken(token)
-                .map(mapper::toDomain);
+        return repository.findByToken(token).map(mapper::toDomain);
     }
 
     @Override

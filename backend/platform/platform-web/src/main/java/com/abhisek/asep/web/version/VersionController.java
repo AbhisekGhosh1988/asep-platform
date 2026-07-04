@@ -22,8 +22,7 @@ public class VersionController {
     @GetMapping
     public ApiResponse<VersionResponse> version() {
 
-        VersionResponse response = new VersionResponse(applicationName, version,
-                System.getProperty("java.version"), SpringBootVersion.getVersion(), Instant.now());
+        VersionResponse response = new VersionResponse(applicationName, version, System.getProperty("java.version"), SpringBootVersion.getVersion(), Instant.now());
 
         return ApiResponse.success(response);
     }

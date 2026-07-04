@@ -11,16 +11,7 @@ public class ProjectApplicationMapperImpl implements ProjectApplicationMapper {
     @Override
     public ProjectResponse toResponse(Project project) {
 
-        return ProjectResponse.builder()
-                .id(project.getId())
-                .name(project.getName())
-                .description(project.getDescription())
-                .ownerId(project.getOwnerId())
-                .status(project.getStatus())
-                .aiProvider(project.getAiProvider())
-                .createdAt(project.getCreatedAt())
-                .updatedAt(project.getUpdatedAt())
-                .build();
+        return ProjectResponse.builder().id(project.getId()).name(project.getName()).description(project.getDescription()).ownerId(project.getOwnerId()).status(project.getStatus()).aiProvider(project.getAiProvider()).createdAt(project.getCreatedAt()).updatedAt(project.getUpdatedAt()).build();
 
     }
 }

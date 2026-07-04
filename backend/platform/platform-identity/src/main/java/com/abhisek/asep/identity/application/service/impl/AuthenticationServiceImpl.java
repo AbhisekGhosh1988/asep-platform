@@ -28,33 +28,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public LoginResponse login(LoginRequest request) {
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
 
-        User user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() ->
-                        new UserNotFoundException(
-                                "User not found: " + request.getUsername()));
-        String refreshToken =
-                jwtService.generateRefreshToken(user);
+        User user = userRepository.findByUsername(request.getUsername()).orElseThrow(() -> new UserNotFoundException("User not found: " + request.getUsername()));
+        String refreshToken = jwtService.generateRefreshToken(user);
 
-        RefreshToken token = RefreshToken.builder()
-                .token(refreshToken)
-                .userId(user.getId())
-                .expiryDate(Instant.now().plusSeconds(604800))
-                .revoked(false)
-                .build();
+        RefreshToken token = RefreshToken.builder().token(refreshToken).userId(user.getId()).expiryDate(Instant.now().plusSeconds(604800)).revoked(false).build();
 
         refreshTokenRepository.save(token);
-        return LoginResponse.builder()
-                .accessToken(jwtService.generateAccessToken(user))
-                .refreshToken(refreshToken)
-                .tokenType("Bearer")
-                .expiresIn(3600)
-                .build();
+        return LoginResponse.builder().accessToken(jwtService.generateAccessToken(user)).refreshToken(refreshToken).tokenType("Bearer").expiresIn(3600).build();
     }
 }

@@ -27,19 +27,13 @@ public class OpenApiConfiguration {
 
                         .version("1.0.0")
 
-                        .contact(new Contact()
-                                .name("ASEP")
-                                .email("admin@asep.ai"))
+                        .contact(new Contact().name("ASEP").email("admin@asep.ai"))
 
-                        .license(new License()
-                                .name("Proprietary")))
+                        .license(new License().name("Proprietary")))
 
-                .addSecurityItem(
-                        new SecurityRequirement()
-                                .addList(scheme))
+                .addSecurityItem(new SecurityRequirement().addList(scheme))
 
-                .schemaRequirement(
-                        scheme,
+                .schemaRequirement(scheme,
 
                         new SecurityScheme()
 

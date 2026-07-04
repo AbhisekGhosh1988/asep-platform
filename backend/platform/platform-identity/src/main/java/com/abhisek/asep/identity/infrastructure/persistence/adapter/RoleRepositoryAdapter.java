@@ -20,39 +20,28 @@ public class RoleRepositoryAdapter implements RoleRepository {
 
     @Override
     public Role save(Role role) {
-        return mapper.toDomain(
-                repository.save(
-                        mapper.toEntity(role)
-                )
-        );
+        return mapper.toDomain(repository.save(mapper.toEntity(role)));
     }
 
     @Override
     public Optional<Role> findById(String id) {
-        return repository.findById(id)
-                .map(mapper::toDomain);
+        return repository.findById(id).map(mapper::toDomain);
     }
 
     @Override
     public Optional<Role> findByRoleType(RoleType roleType) {
-        return repository.findByRoleType(roleType)
-                .map(mapper::toDomain);
+        return repository.findByRoleType(roleType).map(mapper::toDomain);
     }
 
     @Override
     public List<Role> findAll() {
 
-        return repository.findAll()
-                .stream()
-                .map(mapper::toDomain)
-                .toList();
+        return repository.findAll().stream().map(mapper::toDomain).toList();
     }
 
     @Override
     public void delete(Role role) {
 
-        repository.delete(
-                mapper.toEntity(role)
-        );
+        repository.delete(mapper.toEntity(role));
     }
 }

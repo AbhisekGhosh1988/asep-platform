@@ -34,8 +34,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     public RefreshTokenResponse refresh(RefreshTokenRequest request) {
 
         // Validate refresh token
-        RefreshToken refreshToken = refreshTokenRepository.findByToken(request.getRefreshToken()).
-                orElseThrow(() -> new RefreshTokenNotFoundException("Refresh token not found"));
+        RefreshToken refreshToken = refreshTokenRepository.findByToken(request.getRefreshToken()).orElseThrow(() -> new RefreshTokenNotFoundException("Refresh token not found"));
 
         // Check revoked
         if (refreshToken.isRevoked()) {
@@ -46,8 +45,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
             throw new ASEPException(ErrorCode.TOKEN_EXPIRED, "Refresh token has expired");
         }
         // Load user
-        User user = userRepository.findById(refreshToken.getUserId()).
-                orElseThrow(() -> new UserNotFoundException("User not found"));
+        User user = userRepository.findById(refreshToken.getUserId()).orElseThrow(() -> new UserNotFoundException("User not found"));
 
         // Revoke old refresh token
         refreshToken.setRevoked(true);
@@ -60,14 +58,11 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         String newRefreshToken = jwtService.generateRefreshToken(user);
 
         // Persist new refresh token
-        RefreshToken newToken = RefreshToken.builder().token(newRefreshToken).
-                userId(user.getId()).expiryDate(Instant.now().plusMillis(refreshTokenValidity)).
-                revoked(false).build();
+        RefreshToken newToken = RefreshToken.builder().token(newRefreshToken).userId(user.getId()).expiryDate(Instant.now().plusMillis(refreshTokenValidity)).revoked(false).build();
 
         refreshTokenRepository.save(newToken);
 
         // Response
-        return RefreshTokenResponse.builder().accessToken(accessToken).
-                refreshToken(newRefreshToken).tokenType("Bearer").expiresIn(3600).build();
+        return RefreshTokenResponse.builder().accessToken(accessToken).refreshToken(newRefreshToken).tokenType("Bearer").expiresIn(3600).build();
     }
 }

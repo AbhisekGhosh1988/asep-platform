@@ -19,76 +19,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/permissions")
 @RequiredArgsConstructor
-@Tag(
-        name = "Permission Management",
-        description = "Manage permissions"
-)
+@Tag(name = "Permission Management", description = "Manage permissions")
 public class PermissionController {
 
     private final PermissionService permissionService;
 
     @PostMapping
-    @Operation(
-            summary = "Create Permission",
-            description = "Creates a new application permission."
-    )
+    @Operation(summary = "Create Permission", description = "Creates a new application permission.")
     @SecurityRequirement(name = "Bearer Authentication")
-    @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Permission created"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Permission already exists")
-    })
-    public ResponseEntity<ApiResponse<PermissionResponse>> create(
-            @Valid @RequestBody CreatePermissionRequest request) {
+    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Permission created"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Permission already exists")})
+    public ResponseEntity<ApiResponse<PermissionResponse>> create(@Valid @RequestBody CreatePermissionRequest request) {
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(
-                        ApiResponse.success(
-                                "Permission created successfully",
-                                permissionService.create(request)
-                        )
-                );
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Permission created successfully", permissionService.create(request)));
     }
-    @Operation(
-            summary = "List Permission",
-            description = "Returns all Permission."
-    )
+
+    @Operation(summary = "List Permission", description = "Returns all Permission.")
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping
     public ResponseEntity<ApiResponse<List<PermissionResponse>>> findAll() {
 
-        return ResponseEntity.ok(
-                ApiResponse.success(
-                        "Permissions retrieved successfully",
-                        permissionService.findAll()
-                )
-        );
+        return ResponseEntity.ok(ApiResponse.success("Permissions retrieved successfully", permissionService.findAll()));
     }
-    @Operation(
-            summary = "Find Permission",
-            description = "Returns Permission by id."
-    )
+
+    @Operation(summary = "Find Permission", description = "Returns Permission by id.")
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<PermissionResponse>> findById(
-            @PathVariable String id) {
+    public ResponseEntity<ApiResponse<PermissionResponse>> findById(@PathVariable String id) {
 
-        return ResponseEntity.ok(
-                ApiResponse.success(
-                        "Permission retrieved successfully",
-                        permissionService.findById(id)
-                )
-        );
+        return ResponseEntity.ok(ApiResponse.success("Permission retrieved successfully", permissionService.findById(id)));
     }
 
     @DeleteMapping("/{id}")
-    @Operation(
-            summary = "Delete Permission",
-            description = "Deletes a Permission."
-    )
+    @Operation(summary = "Delete Permission", description = "Deletes a Permission.")
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<Void> delete(
-            @PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable String id) {
 
         permissionService.delete(id);
 

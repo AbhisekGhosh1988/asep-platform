@@ -22,9 +22,7 @@ public class JwtServiceImpl implements JwtService {
 
     private final long refreshTokenValidity;
 
-    public JwtServiceImpl(@Value("${asep.security.jwt.secret}") String secret,
-                          @Value("${asep.security.jwt.access-token-validity}") long accessTokenValidity,
-                          @Value("${asep.security.jwt.refresh-token-validity}") long refreshTokenValidity) {
+    public JwtServiceImpl(@Value("${asep.security.jwt.secret}") String secret, @Value("${asep.security.jwt.access-token-validity}") long accessTokenValidity, @Value("${asep.security.jwt.refresh-token-validity}") long refreshTokenValidity) {
 
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.accessTokenValidity = accessTokenValidity;
@@ -43,12 +41,7 @@ public class JwtServiceImpl implements JwtService {
 
     private String generateToken(User user, long validity) {
         Date now = new Date();
-        return Jwts.builder().subject(user.getUsername()).
-                claim("userId", user.getId()).claim("email", user.getEmail()).
-                claim("roles", user.getRoles().stream().
-                        map(role -> role.getRoleType()).toList()).issuer("asep-platform").
-                audience().add("asep-api").and().id(UUID.randomUUID().toString()).issuedAt(now).
-                expiration(new Date(now.getTime() + validity)).signWith(key, SignatureAlgorithm.HS256).compact();
+        return Jwts.builder().subject(user.getUsername()).claim("userId", user.getId()).claim("email", user.getEmail()).claim("roles", user.getRoles().stream().map(role -> role.getRoleType()).toList()).issuer("asep-platform").audience().add("asep-api").and().id(UUID.randomUUID().toString()).issuedAt(now).expiration(new Date(now.getTime() + validity)).signWith(key, SignatureAlgorithm.HS256).compact();
 
     }
 
@@ -61,17 +54,14 @@ public class JwtServiceImpl implements JwtService {
     public boolean validateToken(String token) {
         try {
             Claims claims = getClaims(token);
-            return !claims.getExpiration().before(new Date()) &&
-                    "asep-platform".equals(claims.getIssuer()) &&
-                    claims.getAudience().contains("asep-api");
+            return !claims.getExpiration().before(new Date()) && "asep-platform".equals(claims.getIssuer()) && claims.getAudience().contains("asep-api");
         } catch (Exception ex) {
             return false;
         }
     }
 
     private Claims getClaims(String token) {
-        return Jwts.parser().verifyWith((javax.crypto.SecretKey) key).
-                build().parseSignedClaims(token).getPayload();
+        return Jwts.parser().verifyWith((javax.crypto.SecretKey) key).build().parseSignedClaims(token).getPayload();
     }
 
     public String extractUserId(String token) {

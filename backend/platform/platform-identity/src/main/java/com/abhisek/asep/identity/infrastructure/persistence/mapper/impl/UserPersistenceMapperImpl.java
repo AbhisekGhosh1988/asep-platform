@@ -15,17 +15,7 @@ public class UserPersistenceMapperImpl implements UserPersistenceMapper {
             return null;
         }
 
-        return User.builder()
-                .id(entity.getId())
-                .username(entity.getUsername())
-                .email(entity.getEmail())
-                .password(entity.getPassword())
-                .firstName(entity.getFirstName())
-                .lastName(entity.getLastName())
-                .status(entity.getStatus())
-                .createdAt(entity.getCreatedAt())
-                .updatedAt(entity.getUpdatedAt())
-                .build();
+        return User.builder().id(entity.getId()).username(entity.getUsername()).email(entity.getEmail()).password(entity.getPassword()).firstName(entity.getFirstName()).lastName(entity.getLastName()).status(entity.getStatus()).createdAt(entity.getCreatedAt()).updatedAt(entity.getUpdatedAt()).build();
     }
 
     @Override
@@ -35,16 +25,6 @@ public class UserPersistenceMapperImpl implements UserPersistenceMapper {
             return null;
         }
 
-        return UserEntity.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .password(user.getPassword())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .status(user.getStatus())
-                .createdAt(user.getCreatedAt())
-                .updatedAt(user.getUpdatedAt())
-                .build();
+        return UserEntity.builder().id(user.getId()).username(user.getUsername()).email(user.getEmail()).password(user.getPassword()).firstName(user.getFirstName()).lastName(user.getLastName()).status(user.getStatus()).createdAt(user.getCreatedAt()).updatedAt(user.getUpdatedAt()).build();
     }
 }

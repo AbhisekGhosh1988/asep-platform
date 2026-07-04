@@ -41,12 +41,9 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(ErrorCode.CONFLICT, "Email already exists");
         }
 
-        Role defaultRole = roleRepository.findByRoleType(RoleType.DEVELOPER)
-                .orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Default role not found"));
+        Role defaultRole = roleRepository.findByRoleType(RoleType.DEVELOPER).orElseThrow(() -> new BusinessException(ErrorCode.RESOURCE_NOT_FOUND, "Default role not found"));
 
-        User user = User.builder().username(request.getUsername()).email(request.getEmail()).
-                password(passwordEncoder.encode(request.getPassword())).firstName(request.getFirstName()).
-                lastName(request.getLastName()).status(UserStatus.ACTIVE).roles(Set.of(defaultRole)).build();
+        User user = User.builder().username(request.getUsername()).email(request.getEmail()).password(passwordEncoder.encode(request.getPassword())).firstName(request.getFirstName()).lastName(request.getLastName()).status(UserStatus.ACTIVE).roles(Set.of(defaultRole)).build();
 
         userRepository.save(user);
 

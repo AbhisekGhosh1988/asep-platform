@@ -10,8 +10,7 @@ public final class SecurityUtils {
 
     public static String currentUsername() {
 
-        Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null) {
             return null;
@@ -22,11 +21,9 @@ public final class SecurityUtils {
 
     public static boolean isAuthenticated() {
 
-        Authentication authentication =
-                SecurityContextHolder.getContext().getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        return authentication != null
-                && authentication.isAuthenticated();
+        return authentication != null && authentication.isAuthenticated();
 
     }
 }

@@ -20,34 +20,25 @@ public class ProjectRepositoryAdapter implements ProjectRepository {
     @Override
     public Project save(Project project) {
 
-        return mapper.toDomain(
-                repository.save(
-                        mapper.toEntity(project)
-                )
-        );
+        return mapper.toDomain(repository.save(mapper.toEntity(project)));
     }
 
     @Override
     public Optional<Project> findById(String id) {
 
-        return repository.findById(id)
-                .map(mapper::toDomain);
+        return repository.findById(id).map(mapper::toDomain);
     }
 
     @Override
     public Optional<Project> findByName(String name) {
 
-        return repository.findByName(name)
-                .map(mapper::toDomain);
+        return repository.findByName(name).map(mapper::toDomain);
     }
 
     @Override
     public List<Project> findAll() {
 
-        return repository.findAll()
-                .stream()
-                .map(mapper::toDomain)
-                .toList();
+        return repository.findAll().stream().map(mapper::toDomain).toList();
     }
 
     @Override

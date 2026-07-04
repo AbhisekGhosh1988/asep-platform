@@ -19,75 +19,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/roles")
 @RequiredArgsConstructor
-@Tag(
-        name = "Role Management",
-        description = "Manage application roles"
-)
+@Tag(name = "Role Management", description = "Manage application roles")
 public class RoleController {
 
     private final RoleService roleService;
 
     @PostMapping
-    @Operation(
-            summary = "Create Role",
-            description = "Creates a new application role."
-    )
+    @Operation(summary = "Create Role", description = "Creates a new application role.")
     @SecurityRequirement(name = "Bearer Authentication")
-    @ApiResponses({
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Role created"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Role already exists")
-    })
-    public ResponseEntity<ApiResponse<RoleResponse>> create(
-            @Valid @RequestBody CreateRoleRequest request) {
+    @ApiResponses({@io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Role created"), @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "409", description = "Role already exists")})
+    public ResponseEntity<ApiResponse<RoleResponse>> create(@Valid @RequestBody CreateRoleRequest request) {
 
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(
-                        ApiResponse.success(
-                                "Role created successfully",
-                                roleService.create(request)
-                        )
-                );
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("Role created successfully", roleService.create(request)));
     }
-    @Operation(
-            summary = "List Roles",
-            description = "Returns all roles."
-    )
+
+    @Operation(summary = "List Roles", description = "Returns all roles.")
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping
     public ResponseEntity<ApiResponse<List<RoleResponse>>> findAll() {
 
-        return ResponseEntity.ok(
-                ApiResponse.success(
-                        "Roles retrieved successfully",
-                        roleService.findAll()
-                )
-        );
+        return ResponseEntity.ok(ApiResponse.success("Roles retrieved successfully", roleService.findAll()));
     }
-    @Operation(
-            summary = "Find Role",
-            description = "Returns role by id."
-    )
+
+    @Operation(summary = "Find Role", description = "Returns role by id.")
     @SecurityRequirement(name = "Bearer Authentication")
     @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<RoleResponse>> findById(
-            @PathVariable String id) {
+    public ResponseEntity<ApiResponse<RoleResponse>> findById(@PathVariable String id) {
 
-        return ResponseEntity.ok(
-                ApiResponse.success(
-                        "Role retrieved successfully",
-                        roleService.findById(id)
-                )
-        );
+        return ResponseEntity.ok(ApiResponse.success("Role retrieved successfully", roleService.findById(id)));
     }
-    @Operation(
-            summary = "Delete Role",
-            description = "Deletes a role."
-    )
+
+    @Operation(summary = "Delete Role", description = "Deletes a role.")
     @SecurityRequirement(name = "Bearer Authentication")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(
-            @PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable String id) {
 
         roleService.delete(id);
 

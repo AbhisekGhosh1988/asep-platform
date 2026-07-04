@@ -31,22 +31,9 @@ public class IdentityBootstrapRunner {
             return;
         }
 
-        Role superAdminRole = roleRepository
-                .findByRoleType(RoleType.SUPER_ADMIN)
-                .orElseThrow(() ->
-                        new IllegalStateException(
-                                "SUPER_ADMIN role not found. "
-                                        + "Run Flyway migrations first."));
+        Role superAdminRole = roleRepository.findByRoleType(RoleType.SUPER_ADMIN).orElseThrow(() -> new IllegalStateException("SUPER_ADMIN role not found. " + "Run Flyway migrations first."));
 
-        User admin = User.builder()
-                .username("admin")
-                .email("admin@asep.ai")
-                .password(passwordEncoder.encode("admin123"))
-                .firstName("System")
-                .lastName("Administrator")
-                .status(UserStatus.ACTIVE)
-                .roles(Set.of(superAdminRole))
-                .build();
+        User admin = User.builder().username("admin").email("admin@asep.ai").password(passwordEncoder.encode("admin123")).firstName("System").lastName("Administrator").status(UserStatus.ACTIVE).roles(Set.of(superAdminRole)).build();
 
         userRepository.save(admin);
 

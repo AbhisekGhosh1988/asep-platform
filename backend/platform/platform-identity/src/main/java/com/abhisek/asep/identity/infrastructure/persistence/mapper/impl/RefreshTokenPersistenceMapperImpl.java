@@ -6,8 +6,7 @@ import com.abhisek.asep.identity.infrastructure.persistence.mapper.RefreshTokenP
 import org.springframework.stereotype.Component;
 
 @Component
-public class RefreshTokenPersistenceMapperImpl
-        implements RefreshTokenPersistenceMapper {
+public class RefreshTokenPersistenceMapperImpl implements RefreshTokenPersistenceMapper {
 
     @Override
     public RefreshToken toDomain(RefreshTokenEntity entity) {
@@ -16,14 +15,7 @@ public class RefreshTokenPersistenceMapperImpl
             return null;
         }
 
-        return RefreshToken.builder()
-                .id(entity.getId())
-                .token(entity.getToken())
-                .userId(entity.getUserId())
-                .expiryDate(entity.getExpiryDate())
-                .revoked(entity.isRevoked())
-                .createdAt(entity.getCreatedAt())
-                .build();
+        return RefreshToken.builder().id(entity.getId()).token(entity.getToken()).userId(entity.getUserId()).expiryDate(entity.getExpiryDate()).revoked(entity.isRevoked()).createdAt(entity.getCreatedAt()).build();
     }
 
     @Override
@@ -33,13 +25,6 @@ public class RefreshTokenPersistenceMapperImpl
             return null;
         }
 
-        return RefreshTokenEntity.builder()
-                .id(model.getId())
-                .token(model.getToken())
-                .userId(model.getUserId())
-                .expiryDate(model.getExpiryDate())
-                .revoked(model.isRevoked())
-                .createdAt(model.getCreatedAt())
-                .build();
+        return RefreshTokenEntity.builder().id(model.getId()).token(model.getToken()).userId(model.getUserId()).expiryDate(model.getExpiryDate()).revoked(model.isRevoked()).createdAt(model.getCreatedAt()).build();
     }
 }

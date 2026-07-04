@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserAdministrationServiceImpl
-        implements UserAdministrationService {
+public class UserAdministrationServiceImpl implements UserAdministrationService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -22,13 +21,9 @@ public class UserAdministrationServiceImpl
     @Override
     public void assignRole(String userId, String roleId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new RoleNotFoundException(
-                        "User not found: " + roleId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RoleNotFoundException("User not found: " + roleId));
 
-        Role role = roleRepository.findById(roleId).orElseThrow(() ->
-                new RoleNotFoundException(
-                        "Role not found: " + roleId));
+        Role role = roleRepository.findById(roleId).orElseThrow(() -> new RoleNotFoundException("Role not found: " + roleId));
 
         user.getRoles().add(role);
 
@@ -39,12 +34,9 @@ public class UserAdministrationServiceImpl
     @Override
     public void removeRole(String userId, String roleId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new RoleNotFoundException(
-                        "User not found: " + roleId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new RoleNotFoundException("User not found: " + roleId));
 
-        user.getRoles().removeIf(role ->
-                role.getId().equals(roleId));
+        user.getRoles().removeIf(role -> role.getId().equals(roleId));
 
         userRepository.save(user);
 
@@ -53,9 +45,7 @@ public class UserAdministrationServiceImpl
     @Override
     public void enableUser(String userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException(
-                        "User not found: " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found: " + userId));
 
         user.setStatus(UserStatus.ACTIVE);
 
@@ -66,9 +56,7 @@ public class UserAdministrationServiceImpl
     @Override
     public void disableUser(String userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException(
-                        "User not found: " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found: " + userId));
 
         user.setStatus(UserStatus.DISABLED);
 
@@ -79,9 +67,7 @@ public class UserAdministrationServiceImpl
     @Override
     public void lockUser(String userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException(
-                        "User not found: " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found: " + userId));
 
         user.setStatus(UserStatus.LOCKED);
 
@@ -92,9 +78,7 @@ public class UserAdministrationServiceImpl
     @Override
     public void unlockUser(String userId) {
 
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new UserNotFoundException(
-                        "User not found: " + userId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found: " + userId));
 
         user.setStatus(UserStatus.ACTIVE);
 

@@ -16,9 +16,7 @@ public class LogoutServiceImpl implements LogoutService {
     @Override
     public void logout(String username) {
 
-        userRepository.findByUsername(username)
-                .ifPresent(user ->
-                        refreshTokenRepository.deleteByUserId(user.getId()));
+        userRepository.findByUsername(username).ifPresent(user -> refreshTokenRepository.deleteByUserId(user.getId()));
 
     }
 }
