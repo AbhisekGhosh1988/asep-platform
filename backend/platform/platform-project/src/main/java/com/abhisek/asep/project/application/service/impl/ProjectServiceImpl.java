@@ -12,7 +12,7 @@ import com.abhisek.asep.project.domain.event.ProjectUpdatedEvent;
 import com.abhisek.asep.project.domain.exception.DuplicateProjectException;
 import com.abhisek.asep.project.domain.exception.ProjectNotFoundException;
 import com.abhisek.asep.project.domain.model.Project;
-import com.abhisek.asep.project.domain.model.ProjectStatus;
+import com.abhisek.asep.project.domain.enums.ProjectStatus;
 import com.abhisek.asep.project.domain.repository.ProjectRepository;
 import com.abhisek.asep.project.domain.service.ProjectDomainService;
 import lombok.RequiredArgsConstructor;

@@ -1,5 +1,7 @@
 package com.abhisek.asep.project.domain.model;
 
+import com.abhisek.asep.project.domain.enums.AIProvider;
+import com.abhisek.asep.project.domain.enums.ProjectStatus;
 import lombok.*;
 
 import java.time.Instant;

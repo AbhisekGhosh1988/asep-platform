@@ -1,6 +1,6 @@
 package com.abhisek.asep.project.application.dto.response;
 
-import com.abhisek.asep.project.domain.model.ProjectRole;
+import com.abhisek.asep.project.domain.enums.ProjectRole;
 import lombok.Builder;
 import lombok.Data;
 

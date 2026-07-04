@@ -3,7 +3,9 @@ package com.abhisek.asep.project.infrastructure.persistence.mapper.impl;
 import com.abhisek.asep.project.domain.model.ProjectMember;
 import com.abhisek.asep.project.infrastructure.persistence.entity.ProjectMemberEntity;
 import com.abhisek.asep.project.infrastructure.persistence.mapper.ProjectMemberPersistenceMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjectMemberPersistenceMapperImpl implements ProjectMemberPersistenceMapper {
     @Override
     public ProjectMemberEntity toEntity(ProjectMember member) {

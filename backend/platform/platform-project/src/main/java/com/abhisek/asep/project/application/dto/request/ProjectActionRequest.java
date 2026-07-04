@@ -1,6 +1,6 @@
 package com.abhisek.asep.project.application.dto.request;
 
-import com.abhisek.asep.project.domain.model.ProjectAction;
+import com.abhisek.asep.project.domain.enums.ProjectAction;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

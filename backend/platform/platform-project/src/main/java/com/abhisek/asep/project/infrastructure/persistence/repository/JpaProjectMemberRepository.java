@@ -12,4 +12,6 @@ public interface JpaProjectMemberRepository extends JpaRepository<ProjectMemberE
 
     Optional<ProjectMemberEntity> findByProjectIdAndUserId(String projectId, String userId);
 
+    long countByProjectId(String projectId);
+
 }

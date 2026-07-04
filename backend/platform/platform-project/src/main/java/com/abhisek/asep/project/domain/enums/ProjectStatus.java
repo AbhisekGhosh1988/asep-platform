@@ -1,4 +1,4 @@
-package com.abhisek.asep.project.domain.model;
+package com.abhisek.asep.project.domain.enums;
 
 public enum ProjectStatus {
 

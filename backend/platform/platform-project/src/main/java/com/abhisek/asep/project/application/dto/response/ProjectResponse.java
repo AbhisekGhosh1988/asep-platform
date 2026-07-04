@@ -1,7 +1,7 @@
 package com.abhisek.asep.project.application.dto.response;
 
-import com.abhisek.asep.project.domain.model.AIProvider;
-import com.abhisek.asep.project.domain.model.ProjectStatus;
+import com.abhisek.asep.project.domain.enums.AIProvider;
+import com.abhisek.asep.project.domain.enums.ProjectStatus;
 import lombok.Builder;
 import lombok.Data;
 

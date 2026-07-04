@@ -14,6 +14,7 @@ import com.abhisek.asep.project.domain.repository.ProjectMemberRepository;
 import com.abhisek.asep.project.domain.repository.ProjectRepository;
 import com.abhisek.asep.project.domain.service.ProjectDomainService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;

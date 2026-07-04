@@ -14,5 +14,6 @@ public interface ProjectMemberRepository {
     Optional<ProjectMember> findByProjectIdAndUserId(String projectId, String userId);
 
     void delete(ProjectMember member);
+    long countByProjectId(String projectId);
 
 }

@@ -1,6 +1,6 @@
 package com.abhisek.asep.project.application.dto.request;
 
-import com.abhisek.asep.project.domain.model.ProjectRole;
+import com.abhisek.asep.project.domain.enums.ProjectRole;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

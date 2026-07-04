@@ -1,6 +1,6 @@
 package com.abhisek.asep.project.infrastructure.persistence.entity;
 
-import com.abhisek.asep.project.domain.model.ProjectRole;
+import com.abhisek.asep.project.domain.enums.ProjectRole;
 import jakarta.persistence.*;
 import lombok.*;
 

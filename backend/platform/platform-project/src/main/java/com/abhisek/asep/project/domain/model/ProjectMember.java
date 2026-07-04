@@ -1,5 +1,6 @@
 package com.abhisek.asep.project.domain.model;
 
+import com.abhisek.asep.project.domain.enums.ProjectRole;
 import lombok.*;
 
 import java.time.Instant;

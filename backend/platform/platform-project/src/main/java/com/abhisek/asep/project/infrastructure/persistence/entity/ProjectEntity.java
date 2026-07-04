@@ -1,7 +1,7 @@
 package com.abhisek.asep.project.infrastructure.persistence.entity;
 
-import com.abhisek.asep.project.domain.model.AIProvider;
-import com.abhisek.asep.project.domain.model.ProjectStatus;
+import com.abhisek.asep.project.domain.enums.AIProvider;
+import com.abhisek.asep.project.domain.enums.ProjectStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

@@ -4,8 +4,8 @@ import com.abhisek.asep.common.enums.ErrorCode;
 import com.abhisek.asep.common.exception.ASEPException;
 import com.abhisek.asep.project.domain.model.Project;
 import com.abhisek.asep.project.domain.model.ProjectMember;
-import com.abhisek.asep.project.domain.model.ProjectRole;
-import com.abhisek.asep.project.domain.model.ProjectStatus;
+import com.abhisek.asep.project.domain.enums.ProjectRole;
+import com.abhisek.asep.project.domain.enums.ProjectStatus;
 import com.abhisek.asep.project.domain.service.ProjectDomainService;
 import org.springframework.stereotype.Service;
 

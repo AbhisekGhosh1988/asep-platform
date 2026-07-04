@@ -3,7 +3,9 @@ package com.abhisek.asep.project.application.mapper.impl;
 import com.abhisek.asep.project.application.dto.response.ProjectMemberResponse;
 import com.abhisek.asep.project.application.mapper.ProjectMemberApplicationMapper;
 import com.abhisek.asep.project.domain.model.ProjectMember;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProjectMemberApplicationMapperImpl implements ProjectMemberApplicationMapper {
 
     @Override

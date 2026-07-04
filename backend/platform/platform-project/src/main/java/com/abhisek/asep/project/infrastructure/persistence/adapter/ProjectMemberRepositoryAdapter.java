@@ -40,4 +40,10 @@ public class ProjectMemberRepositoryAdapter implements ProjectMemberRepository {
 
         repository.delete(mapper.toEntity(member));
     }
+    @Override
+    public long countByProjectId(String projectId) {
+
+        return repository.countByProjectId(projectId);
+
+    }
 }
