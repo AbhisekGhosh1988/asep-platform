@@ -1,8 +1,8 @@
 package com.abhisek.asep.project.application.service.impl;
 
 import com.abhisek.asep.common.enums.ErrorCode;
-import com.abhisek.asep.common.event.DomainEventPublisher;
 import com.abhisek.asep.common.exception.ASEPException;
+import com.abhisek.asep.core.domain.event.DomainEventPublisher;
 import com.abhisek.asep.project.application.dto.response.ProjectResponse;
 import com.abhisek.asep.project.application.mapper.ProjectApplicationMapper;
 import com.abhisek.asep.project.application.service.ProjectLifecycleService;
@@ -38,7 +38,7 @@ public class ProjectLifecycleServiceImpl implements ProjectLifecycleService {
             case ACTIVATE -> {
                 activate(project);
 
-                eventPublisher.publish(new ProjectActivatedEvent(project.getId(), Instant.now()));
+                //eventPublisher.publish(new ProjectActivatedEvent(project.getId(), Instant.now()));
             }
 
             case DEACTIVATE -> {
@@ -49,7 +49,7 @@ public class ProjectLifecycleServiceImpl implements ProjectLifecycleService {
 
                 archive(project);
 
-                eventPublisher.publish(new ProjectArchivedEvent(project.getId(), Instant.now()));
+               // eventPublisher.publish(new ProjectArchivedEvent(project.getId(), Instant.now()));
 
             }
 
@@ -57,7 +57,7 @@ public class ProjectLifecycleServiceImpl implements ProjectLifecycleService {
 
                 restore(project);
 
-                eventPublisher.publish(new ProjectActivatedEvent(project.getId(), Instant.now()));
+                //eventPublisher.publish(new ProjectActivatedEvent(project.getId(), Instant.now()));
 
             }
 

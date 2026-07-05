@@ -1,6 +1,7 @@
 package com.abhisek.asep.project.interfaces.rest;
 
 import com.abhisek.asep.common.response.ApiResponse;
+import com.abhisek.asep.core.web.BaseController;
 import com.abhisek.asep.project.application.dto.request.UpdateProjectSettingsRequest;
 import com.abhisek.asep.project.application.dto.response.ProjectSettingsResponse;
 import com.abhisek.asep.project.application.usecase.GetProjectSettingsUseCase;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,30 +19,22 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Tag(name = "Project Settings", description = "Project Settings APIs")
 @SecurityRequirement(name = "Bearer Authentication")
-public class ProjectSettingsController {
+public class ProjectSettingsController extends BaseController {
 
     private final GetProjectSettingsUseCase getProjectSettingsUseCase;
-
     private final UpdateProjectSettingsUseCase updateProjectSettingsUseCase;
 
     @GetMapping
     @Operation(summary = "Get Project Settings")
-    public ApiResponse<ProjectSettingsResponse> getSettings(@PathVariable String projectId) {
+    public ResponseEntity<ApiResponse<ProjectSettingsResponse>> getSettings(@PathVariable String projectId) {
 
-        return ApiResponse.success("Project settings retrieved successfully", getProjectSettingsUseCase.execute(projectId));
-
+        return ok("Project settings retrieved successfully", getProjectSettingsUseCase.execute(projectId));
     }
 
     @PutMapping
     @Operation(summary = "Update Project Settings")
-    public ApiResponse<ProjectSettingsResponse> updateSettings(
+    public ResponseEntity<ApiResponse<ProjectSettingsResponse>> updateSettings(@PathVariable String projectId, @Valid @RequestBody UpdateProjectSettingsRequest request) {
 
-            @PathVariable String projectId,
-
-            @Valid @RequestBody UpdateProjectSettingsRequest request) {
-
-        return ApiResponse.success("Project settings updated successfully", updateProjectSettingsUseCase.execute(projectId, request));
-
+        return ok("Project settings updated successfully", updateProjectSettingsUseCase.execute(projectId, request));
     }
-
 }

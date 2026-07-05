@@ -1,7 +1,7 @@
 package com.abhisek.asep.project.domain.event;
 
 
-import com.abhisek.asep.common.event.DomainEvent;
+import com.abhisek.asep.common.model.DomainEvent;
 
 import java.time.Instant;
 

@@ -17,26 +17,25 @@
         <relativePath>../pom.xml</relativePath>
 
     </parent>
-
     <artifactId>platform</artifactId>
-
     <packaging>pom</packaging>
 
     <modules>
 
         <module>platform-common</module>
 
-        <module>platform-web</module>
-
-        <module>platform-ai-core</module>
-
-        <module>platform-compiler</module>
+        <module>platform-core</module>
 
         <module>platform-identity</module>
 
         <module>platform-project</module>
 
+        <module>platform-requirements</module>
+
+        <module>platform-web</module>
+
         <module>platform-quality</module>
+        <module>platform-ai</module>
 
     </modules>
 

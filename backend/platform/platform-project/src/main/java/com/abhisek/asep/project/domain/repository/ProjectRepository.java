@@ -1,11 +1,12 @@
 package com.abhisek.asep.project.domain.repository;
 
+import com.abhisek.asep.core.domain.repository.Repository;
 import com.abhisek.asep.project.domain.model.Project;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ProjectRepository {
+public interface ProjectRepository extends Repository {
 
     Project save(Project project);
 

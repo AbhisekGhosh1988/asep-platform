@@ -16,7 +16,11 @@
     <artifactId>platform-project</artifactId>
 
     <dependencies>
-
+        <dependency>
+            <groupId>com.abhisek.asep</groupId>
+            <artifactId>platform-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.abhisek.asep</groupId>
             <artifactId>platform-common</artifactId>

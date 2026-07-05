@@ -1,6 +1,7 @@
 package com.abhisek.asep.identity.interfaces.rest;
 
 import com.abhisek.asep.common.response.ApiResponse;
+import com.abhisek.asep.core.web.BaseController;
 import com.abhisek.asep.identity.application.dto.request.AssignRoleRequest;
 import com.abhisek.asep.identity.application.service.UserAdministrationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/admin/users")
 @RequiredArgsConstructor
 @Tag(name = "User Administration", description = "Administrative user management APIs")
-public class UserAdministrationController {
+public class UserAdministrationController extends BaseController {
 
     private final UserAdministrationService service;
 
@@ -25,55 +26,51 @@ public class UserAdministrationController {
     public ResponseEntity<ApiResponse<Void>> assignRole(@PathVariable String id, @Valid @RequestBody AssignRoleRequest request) {
 
         service.assignRole(id, request.getRoleId());
-
-        return ResponseEntity.ok(ApiResponse.success("Role assigned", null));
+        return ok("Role assigned", null);
     }
 
-    @PostMapping
+    @DeleteMapping("/{id}/roles/{roleId}")
     @Operation(summary = "Remove role", description = "Remove role of a user.")
     @SecurityRequirement(name = "Bearer Authentication")
-    @DeleteMapping("/{id}/roles/{roleId}")
-    public ResponseEntity<Void> removeRole(@PathVariable String id, @PathVariable String roleId) {
+    public ResponseEntity<ApiResponse<Void>> removeRole(@PathVariable String id, @PathVariable String roleId) {
 
         service.removeRole(id, roleId);
-
-        return ResponseEntity.noContent().build();
+        return deleted("Role removed successfully");
     }
 
     @PutMapping("/{id}/enable")
-    @Operation(summary = "Enable role", description = "Enable role of a user.")
+    @Operation(summary = "Enable user", description = "Enable a user account.")
     @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<ApiResponse<Void>> enable(@PathVariable String id) {
 
         service.enableUser(id);
-
-        return ResponseEntity.ok(ApiResponse.success("User enabled", null));
+        return ok("User enabled", null);
     }
 
     @PutMapping("/{id}/disable")
-    @Operation(summary = "Disable role", description = "Disable role of a user.")
+    @Operation(summary = "Disable user", description = "Disable a user account.")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<ApiResponse<Void>> disable(@PathVariable String id) {
 
         service.disableUser(id);
-
-        return ResponseEntity.ok(ApiResponse.success("User disabled", null));
+        return ok("User disabled", null);
     }
 
     @PutMapping("/{id}/lock")
-    @Operation(summary = "Lock role", description = "Lock role of a user.")
+    @Operation(summary = "Lock user", description = "Lock a user account.")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<ApiResponse<Void>> lock(@PathVariable String id) {
 
         service.lockUser(id);
-
-        return ResponseEntity.ok(ApiResponse.success("User locked", null));
+        return ok("User locked", null);
     }
 
     @PutMapping("/{id}/unlock")
-    @Operation(summary = "UnLock role", description = "UnLock role of a user.")
+    @Operation(summary = "Unlock user", description = "Unlock a user account.")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<ApiResponse<Void>> unlock(@PathVariable String id) {
 
         service.unlockUser(id);
-
-        return ResponseEntity.ok(ApiResponse.success("User unlocked", null));
+        return ok("User unlocked", null);
     }
 }

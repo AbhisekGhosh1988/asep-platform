@@ -1,9 +1,10 @@
 package com.abhisek.asep.project.domain.service;
 
+import com.abhisek.asep.core.domain.service.DomainService;
 import com.abhisek.asep.project.domain.model.Project;
 import com.abhisek.asep.project.domain.model.ProjectMember;
 
-public interface ProjectDomainService {
+public interface ProjectDomainService extends DomainService {
 
     void validateCreate(Project project);
 

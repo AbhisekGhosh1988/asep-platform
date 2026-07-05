@@ -35,7 +35,14 @@ public enum ErrorCode {
     // Generator
     GENERATION_FAILED("GEN-0001", "Generation failed"),
     TEMPLATE_NOT_FOUND("GEN-0002", "Template not found"),
-    INVALID_SPECIFICATION("GEN-0003", "Invalid specification");
+    INVALID_SPECIFICATION("GEN-0003", "Invalid specification"),
+
+    // Requirements
+    REQUIREMENT_NOT_FOUND("REQ-0001", "Requirement not found"),
+    DUPLICATE_REQUIREMENT("REQ-0002", "Duplicate requirement"),
+    INVALID_REQUIREMENT("REQ-0003", "Invalid requirement"),
+    REQUIREMENT_APPROVAL_FAILED("REQ-0004", "Requirement approval failed");
+
 
     private final String code;
     private final String message;

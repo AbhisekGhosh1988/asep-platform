@@ -1,6 +1,6 @@
 package com.abhisek.asep.project.application.service.impl;
 
-import com.abhisek.asep.common.event.DomainEventPublisher;
+import com.abhisek.asep.core.domain.event.DomainEventPublisher;
 import com.abhisek.asep.project.application.dto.request.CreateProjectRequest;
 import com.abhisek.asep.project.application.dto.request.UpdateProjectRequest;
 import com.abhisek.asep.project.application.dto.response.ProjectResponse;

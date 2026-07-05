@@ -1,6 +1,7 @@
 package com.abhisek.asep.identity.interfaces.rest;
 
 import com.abhisek.asep.common.response.ApiResponse;
+import com.abhisek.asep.core.web.BaseController;
 import com.abhisek.asep.identity.application.dto.request.LoginRequest;
 import com.abhisek.asep.identity.application.dto.request.RefreshTokenRequest;
 import com.abhisek.asep.identity.application.dto.request.RegisterUserRequest;
@@ -19,7 +20,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 @Tag(name = "Authentication", description = "Authentication and JWT APIs")
-public class AuthenticationController {
+public class AuthenticationController extends BaseController {
 
     private final LoginUseCase loginUseCase;
     private final RefreshTokenService refreshTokenService;
@@ -39,41 +39,36 @@ public class AuthenticationController {
     @Operation(summary = "Authenticate user", description = "Authenticates user and returns access and refresh tokens.")
     public ResponseEntity<ApiResponse<LoginResponse>> login(@Valid @RequestBody LoginRequest request) {
 
-        return ResponseEntity.ok(ApiResponse.success("Login successful", loginUseCase.execute(request)));
-
+        return ok("Login successful", loginUseCase.execute(request));
     }
 
-    @Operation(summary = "Refresh access token", description = "Generates a new access token using a refresh token.")
     @PostMapping("/refresh")
+    @Operation(summary = "Refresh access token", description = "Generates a new access token using a refresh token.")
     public ResponseEntity<ApiResponse<RefreshTokenResponse>> refreshToken(@Valid @RequestBody RefreshTokenRequest request) {
 
-        return ResponseEntity.ok(ApiResponse.success("Token refreshed successfully", refreshTokenService.refresh(request)));
-
+        return ok("Token refreshed successfully", refreshTokenService.refresh(request));
     }
 
-    @Operation(summary = "Logout", description = "Revokes the current refresh token.")
     @PostMapping("/logout")
+    @Operation(summary = "Logout", description = "Revokes the current refresh token.")
     public ResponseEntity<ApiResponse<Void>> logout() {
 
         logoutService.logout(SecurityUtils.currentUsername());
-
-        return ResponseEntity.ok(ApiResponse.success("Logout successful", null));
-
+        return deleted("Logout successful");
     }
 
+    @GetMapping("/me")
     @Operation(summary = "Current user", description = "Returns the authenticated user.")
     @SecurityRequirement(name = "Bearer Authentication")
-    @GetMapping("/me")
     public ResponseEntity<ApiResponse<CurrentUserResponse>> me() {
 
-        return ResponseEntity.ok(ApiResponse.success("Current user", currentUserService.currentUser()));
-
+        return ok("Current user", currentUserService.currentUser());
     }
 
-    @Operation(summary = "Register new user", description = "Registers a new ASEP user.")
     @PostMapping("/register")
+    @Operation(summary = "Register new user", description = "Registers a new ASEP user.")
     public ResponseEntity<ApiResponse<UserResponse>> register(@Valid @RequestBody RegisterUserRequest request) {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success("User registered successfully", registerUserUseCase.execute(request)));
+        return created("User registered successfully", registerUserUseCase.execute(request));
     }
 }

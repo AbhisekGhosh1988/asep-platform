@@ -1,24 +1,9 @@
 package com.abhisek.asep.common.model;
 
 import java.time.Instant;
-import java.util.UUID;
 
-public abstract class DomainEvent {
+public interface DomainEvent {
 
-    private final UUID eventId;
+    Instant occurredOn();
 
-    private final Instant occurredOn;
-
-    protected DomainEvent() {
-        this.eventId = UUID.randomUUID();
-        this.occurredOn = Instant.now();
-    }
-
-    public UUID getEventId() {
-        return eventId;
-    }
-
-    public Instant getOccurredOn() {
-        return occurredOn;
-    }
 }
