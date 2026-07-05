@@ -25,9 +25,9 @@
 
         <module>platform-ai-clients</module>
 
-<!--        <module>platform-ai-prompts</module>-->
+        <module>platform-ai-prompts</module>
 
-<!--        <module>platform-ai-parser</module>-->
+       <module>platform-ai-parser</module>
 
     </modules>
 
