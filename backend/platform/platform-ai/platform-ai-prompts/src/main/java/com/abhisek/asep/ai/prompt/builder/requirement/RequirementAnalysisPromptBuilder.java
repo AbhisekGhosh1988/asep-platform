@@ -7,10 +7,11 @@ import com.abhisek.asep.ai.prompt.util.PromptUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RequirementAnalysisPromptBuilder extends AbstractPromptBuilder {
+public class RequirementAnalysisPromptBuilder
+        extends AbstractPromptBuilder<PromptContext> {
 
     @Override
-    protected PromptTemplate createTemplate(PromptContext context) {
+    protected PromptTemplate createPrompt(PromptContext context) {
 
         String systemPrompt = """
                 You are a Senior Enterprise Solution Architect.

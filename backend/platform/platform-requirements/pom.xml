@@ -17,6 +17,29 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.abhisek.asep</groupId>
+            <artifactId>platform-ai-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.abhisek.asep</groupId>
+            <artifactId>platform-ai-prompts</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.abhisek.asep</groupId>
+            <artifactId>platform-ai-parser</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.abhisek.asep</groupId>
+            <artifactId>platform-ai-clients</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
