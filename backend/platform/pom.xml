@@ -36,6 +36,7 @@
 
         <module>platform-quality</module>
         <module>platform-ai</module>
+        <module>platform-architecture</module>
 
     </modules>
 
