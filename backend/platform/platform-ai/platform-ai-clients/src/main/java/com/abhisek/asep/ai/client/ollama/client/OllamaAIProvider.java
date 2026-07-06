@@ -5,6 +5,7 @@ import com.abhisek.asep.ai.core.config.AIModel;
 import com.abhisek.asep.ai.core.model.request.AIRequest;
 import com.abhisek.asep.ai.core.model.response.AIResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +13,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class OllamaAIProvider implements AIProvider {
 
     private final ChatClient chatClient;
@@ -29,28 +31,15 @@ public class OllamaAIProvider implements AIProvider {
 
     @Override
     public Set<AIModel> getSupportedModels() {
-        return Set.of(
-                AIModel.LLAMA3_1,
-                AIModel.MISTRAL,
-                AIModel.GEMMA,
-                AIModel.QWEN,
-                AIModel.DEEPSEEK,
-                AIModel.PHI4);
+        return Set.of(AIModel.LLAMA3_1, AIModel.MISTRAL, AIModel.GEMMA, AIModel.QWEN, AIModel.DEEPSEEK, AIModel.PHI4);
     }
 
     @Override
     public AIResponse generate(AIRequest request) {
 
-        String content = chatClient.prompt()
-                .system(request.getSystemPrompt())
-                .user(request.getUserPrompt())
-                .call()
-                .content();
-
-        return AIResponse.builder()
-                .provider(getProviderName())
-                .model(request.getModel().name()) // Fixed: changed getModel() to request.getModel()
-                .content(content)
-                .build();
+        String content = chatClient.prompt().system(request.getSystemPrompt()).user(request.getUserPrompt()).call().content();
+        log.info("OLLAMA RESPONSE:\n{}", content);
+        return AIResponse.builder().provider(getProviderName()).model(request.getModel().name()) // Fixed: changed getModel() to request.getModel()
+                .content(content).build();
     }
 }

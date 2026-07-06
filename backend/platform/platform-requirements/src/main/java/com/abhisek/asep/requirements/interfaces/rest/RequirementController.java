@@ -42,7 +42,7 @@ public class RequirementController extends BaseController {
     @PostMapping("/projects/{projectId}/requirements")
     @Operation(summary = "Create Requirement")
     @SecurityRequirement(name = "Bearer Authentication")
-    public ResponseEntity<ApiResponse<RequirementResponse>> create(@PathVariable String projectId, @Valid @RequestBody CreateRequirementRequest request) {
+    public ResponseEntity<ApiResponse<RequirementResponse>> create(@PathVariable("projectId") String projectId, @Valid @RequestBody CreateRequirementRequest request) {
 
         return created("Requirement created successfully", createRequirementUseCase.execute(projectId, request));
     }

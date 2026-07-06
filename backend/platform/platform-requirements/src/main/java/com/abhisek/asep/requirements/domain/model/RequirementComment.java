@@ -10,7 +10,7 @@ import java.time.Instant;
 @AllArgsConstructor
 public class RequirementComment {
     private String id;
-    private Long requirementId;
+    private String requirementId;
     private String comment;
     private String commentedBy;
     private Instant commentedAt;

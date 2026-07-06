@@ -13,7 +13,7 @@ public class RequirementCommentPersistenceMapper {
             return null;
         }
 
-        return RequirementCommentEntity.builder().id(Long.valueOf(domain.getId())).requirementId(domain.getRequirementId()).comment(domain.getComment()).commentedBy(domain.getCommentedBy()).commentedAt(domain.getCommentedAt()).build();
+        return RequirementCommentEntity.builder().id(domain.getId()).requirementId(domain.getRequirementId()).comment(domain.getComment()).commentedBy(domain.getCommentedBy()).commentedAt(domain.getCommentedAt()).build();
     }
 
     public RequirementComment toDomain(RequirementCommentEntity entity) {

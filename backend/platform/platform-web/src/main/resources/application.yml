@@ -21,7 +21,7 @@ spring:
 
       chat:
         options:
-          model: llama3.1
+          model: qwen3:8b
           temperature: 0.2
 
 
@@ -58,7 +58,7 @@ asep:
   ai:
     ollama:
       base-url: http://localhost:11434
-      model: llama3.1
+      model: qwen3:8b
       temperature: 0.2
 
 

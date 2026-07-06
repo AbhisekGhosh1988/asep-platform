@@ -20,7 +20,7 @@ public class RequirementAIController extends BaseController {
 
     @Operation(summary = "Analyze Requirement using AI")
     @PostMapping("/{requirementId}/analyze")
-    public ResponseEntity<ApiResponse<RequirementAnalysis>> analyze(@PathVariable String requirementId) {
+    public ResponseEntity<ApiResponse<RequirementAnalysis>> analyze(@PathVariable("requirementId") String requirementId) {
 
         return ok("Requirement analyzed successfully", service.analyze(requirementId));
 

@@ -4,6 +4,7 @@ import com.abhisek.asep.requirements.domain.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,9 +52,6 @@ public class RequirementEntity  {
 
     private String parentRequirementId;
 
-    private String createdBy;
-
-    private String approvedBy;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(
@@ -62,5 +60,20 @@ public class RequirementEntity  {
     @Column(name = "tag")
     @Builder.Default
     private Set<String> tags = new HashSet<>();
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @Column(name = "updated_at")
+    private Instant updatedAt;
+
+    @Column(name = "created_by")
+    private String createdBy;
+
+    @Column(name = "updated_by")
+    private String updatedBy;
+
+    @Column(name = "approved_by")
+    private String approvedBy;
 
 }

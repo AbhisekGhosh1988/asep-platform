@@ -31,7 +31,38 @@ public class RequirementAnalysisPromptBuilder
                 9. Risks
                 10. Missing Constraints
                 
+                IMPORTANT
+                
                 Return ONLY valid JSON.
+                
+                Do NOT return markdown.
+                
+                Do NOT use ```json.
+                
+                Do NOT explain anything.
+                
+                Use ONLY the following values.
+                
+                RequirementIssueType:
+                
+                AMBIGUITY
+                INCOMPLETE
+                SECURITY
+                PERFORMANCE
+                RELIABILITY
+                SCALABILITY
+                BUSINESS_RULE
+                ACCEPTANCE_CRITERIA
+                DUPLICATE
+                INCONSISTENT
+                
+                Severity:
+                
+                LOW
+                MEDIUM
+                HIGH
+                
+                Return exactly these values.
                 
                 Do not explain anything outside JSON.
                 """;

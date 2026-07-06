@@ -16,8 +16,25 @@ public class RequirementPersistenceMapperImpl implements RequirementPersistenceM
         }
 
         return RequirementEntity.builder()
+                .id(requirement.getId())
+                .projectId(requirement.getProjectId())
+                .title(requirement.getTitle())
+                .description(requirement.getDescription())
+                .type(requirement.getType())
+                .status(requirement.getStatus())
+                .priority(requirement.getPriority())
+                .complexity(requirement.getComplexity())
+                .source(requirement.getSource())
+                .risk(requirement.getRisk())
+                .version(requirement.getVersion())
+                .parentRequirementId(requirement.getParentRequirementId())
+                .tags(requirement.getTags())
 
-                .id(requirement.getId()).projectId(requirement.getProjectId()).title(requirement.getTitle()).description(requirement.getDescription()).type(requirement.getType()).status(requirement.getStatus()).priority(requirement.getPriority()).complexity(requirement.getComplexity()).source(requirement.getSource()).risk(requirement.getRisk()).version(requirement.getVersion()).parentRequirementId(requirement.getParentRequirementId()).tags(requirement.getTags()).createdBy(requirement.getCreatedBy()).approvedBy(requirement.getApprovedBy())
+                .createdAt(requirement.getCreatedAt())
+                .updatedAt(requirement.getUpdatedAt())
+                .createdBy(requirement.getCreatedBy())
+                .updatedBy(requirement.getUpdatedBy())
+                .approvedBy(requirement.getApprovedBy())
 
                 .build();
     }
@@ -30,7 +47,12 @@ public class RequirementPersistenceMapperImpl implements RequirementPersistenceM
 
         return Requirement.builder()
 
-                .id(entity.getId()).projectId(entity.getProjectId()).title(entity.getTitle()).description(entity.getDescription()).type(entity.getType()).status(entity.getStatus()).priority(entity.getPriority()).complexity(entity.getComplexity()).source(entity.getSource()).risk(entity.getRisk()).version(entity.getVersion()).parentRequirementId(entity.getParentRequirementId()).tags(entity.getTags()).createdBy(entity.getCreatedBy()).approvedBy(entity.getApprovedBy()).build();
+                .id(entity.getId()).projectId(entity.getProjectId()).title(entity.getTitle()).
+                description(entity.getDescription()).type(entity.getType()).status(entity.getStatus()).priority(entity.getPriority()).
+                complexity(entity.getComplexity()).source(entity.getSource()).risk(entity.getRisk()).version(entity.getVersion()).
+                parentRequirementId(entity.getParentRequirementId()).tags(entity.getTags()).createdBy(entity.getCreatedBy()).approvedBy(entity.getApprovedBy()).createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .updatedBy(entity.getUpdatedBy()).build();
 
     }
 }

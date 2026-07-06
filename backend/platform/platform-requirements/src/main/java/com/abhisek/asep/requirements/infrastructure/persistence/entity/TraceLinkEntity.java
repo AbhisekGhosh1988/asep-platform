@@ -17,28 +17,31 @@ import java.time.Instant;
 public class TraceLinkEntity {
 
     @Id
+    @Column(name = "id")
     private String id;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "source_type", nullable = false)
     private TraceEntityType sourceType;
 
-    @Column(nullable = false)
+    @Column(name = "source_id", nullable = false)
     private String sourceId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "target_type", nullable = false)
     private TraceEntityType targetType;
 
-    @Column(nullable = false)
+    @Column(name = "target_id", nullable = false)
     private String targetId;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "relation_type", nullable = false)
     private TraceRelationType relationType;
 
+    @Column(name = "created_by")
     private String createdBy;
 
+    @Column(name = "created_at")
     private Instant createdAt;
 
 }

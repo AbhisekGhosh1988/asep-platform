@@ -23,7 +23,7 @@ public class RequirementCommentServiceImpl implements RequirementCommentService 
     @Override
     public RequirementComment addComment(String requirementId, String comment, String commentedBy) {
 
-        RequirementComment requirementComment = RequirementComment.builder().id(UUID.randomUUID().toString()).requirementId(Long.valueOf(requirementId)).comment(comment).commentedBy(commentedBy).commentedAt(Instant.now()).build();
+        RequirementComment requirementComment = RequirementComment.builder().id(UUID.randomUUID().toString()).requirementId(requirementId).comment(comment).commentedBy(commentedBy).commentedAt(Instant.now()).build();
 
         return repository.save(requirementComment);
     }
