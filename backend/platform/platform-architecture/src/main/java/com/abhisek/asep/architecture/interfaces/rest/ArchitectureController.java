@@ -51,7 +51,7 @@ public class ArchitectureController extends BaseController {
     @GetMapping("/{architectureId}")
     public ResponseEntity<ApiResponse<ArchitectureResponse>> getArchitecture(
 
-            @Parameter(description = "Architecture Id") @PathVariable String architectureId) {
+            @Parameter(description = "Architecture Id") @PathVariable("architectureId") String architectureId) {
 
         return ResponseEntity.ok(ApiResponse.success("Architecture retrieved successfully", getArchitectureUseCase.execute(architectureId)));
 
@@ -61,7 +61,7 @@ public class ArchitectureController extends BaseController {
     @PutMapping("/{architectureId}")
     public ResponseEntity<ApiResponse<ArchitectureResponse>> updateArchitecture(
 
-            @Parameter(description = "Architecture Id") @PathVariable String architectureId,
+            @Parameter(description = "Architecture Id") @PathVariable("architectureId") String architectureId,
 
             @Valid @RequestBody UpdateArchitectureRequest request) {
 
@@ -73,7 +73,7 @@ public class ArchitectureController extends BaseController {
     @DeleteMapping("/{architectureId}")
     public ResponseEntity<ApiResponse<Void>> deleteArchitecture(
 
-            @Parameter(description = "Architecture Id") @PathVariable String architectureId) {
+            @Parameter(description = "Architecture Id") @PathVariable("architectureId") String architectureId) {
 
         deleteArchitectureUseCase.execute(architectureId);
 
@@ -85,7 +85,7 @@ public class ArchitectureController extends BaseController {
     @GetMapping("/project/{projectId}")
     public ResponseEntity<ApiResponse<List<ArchitectureResponse>>> listArchitectures(
 
-            @Parameter(description = "Project Id") @PathVariable String projectId) {
+            @Parameter(description = "Project Id") @PathVariable("projectId") String projectId) {
 
         return ResponseEntity.ok(ApiResponse.success("Architectures retrieved successfully", listArchitecturesUseCase.execute(projectId)));
 
