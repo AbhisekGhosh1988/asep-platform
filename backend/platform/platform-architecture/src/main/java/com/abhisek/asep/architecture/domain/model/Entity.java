@@ -1,6 +1,10 @@
 package com.abhisek.asep.architecture.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
@@ -9,27 +13,32 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aggregate {
+public class Entity {
 
     /**
-     * Aggregate identifier.
+     * Unique identifier.
      */
     private String id;
 
     /**
-     * Parent microservice.
+     * Parent Aggregate.
      */
-    private String microserviceId;
+    private String aggregateId;
 
     /**
-     * Aggregate name.
+     * Entity name.
      */
     private String name;
 
     /**
-     * Aggregate description.
+     * Entity description.
      */
     private String description;
+
+    /**
+     * Indicates whether this is the Aggregate Root.
+     */
+    private Boolean rootEntity;
 
     /**
      * Audit fields.

@@ -9,27 +9,35 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aggregate {
+public class Specification {
 
     /**
-     * Aggregate identifier.
+     * Unique identifier.
      */
     private String id;
 
     /**
-     * Parent microservice.
+     * Parent Aggregate.
      */
-    private String microserviceId;
+    private String aggregateId;
 
     /**
-     * Aggregate name.
+     * Specification name.
+     *
+     * Example:
+     * ActiveCustomerSpecification
      */
     private String name;
 
     /**
-     * Aggregate description.
+     * Description.
      */
     private String description;
+
+    /**
+     * Business rule expression.
+     */
+    private String expression;
 
     /**
      * Audit fields.

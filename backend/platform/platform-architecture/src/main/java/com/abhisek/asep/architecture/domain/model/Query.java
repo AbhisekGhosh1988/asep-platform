@@ -2,14 +2,12 @@ package com.abhisek.asep.architecture.domain.model;
 
 import lombok.*;
 
-import java.time.Instant;
-
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DomainEventDefinition {
+public class Query {
 
     /**
      * Unique identifier.
@@ -22,10 +20,7 @@ public class DomainEventDefinition {
     private String aggregateId;
 
     /**
-     * Event name.
-     *
-     * Example:
-     * CustomerRegistered
+     * Query name.
      */
     private String name;
 
@@ -33,21 +28,5 @@ public class DomainEventDefinition {
      * Description.
      */
     private String description;
-
-    /**
-     * Trigger condition.
-     */
-    private String trigger;
-
-    /**
-     * Audit fields.
-     */
-    private String createdBy;
-
-    private Instant createdAt;
-
-    private String updatedBy;
-
-    private Instant updatedAt;
 
 }

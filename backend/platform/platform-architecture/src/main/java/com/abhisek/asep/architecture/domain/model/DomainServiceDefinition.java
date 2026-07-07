@@ -9,25 +9,28 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aggregate {
+public class DomainServiceDefinition {
 
     /**
-     * Aggregate identifier.
+     * Unique identifier.
      */
     private String id;
 
     /**
-     * Parent microservice.
+     * Parent Aggregate.
      */
-    private String microserviceId;
+    private String aggregateId;
 
     /**
-     * Aggregate name.
+     * Service name.
+     *
+     * Example:
+     * CustomerRegistrationService
      */
     private String name;
 
     /**
-     * Aggregate description.
+     * Description.
      */
     private String description;
 

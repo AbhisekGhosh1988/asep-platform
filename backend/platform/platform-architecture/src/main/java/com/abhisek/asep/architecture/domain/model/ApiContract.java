@@ -9,25 +9,33 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aggregate {
+public class ApiContract {
 
     /**
-     * Aggregate identifier.
+     * Unique identifier.
      */
     private String id;
 
     /**
-     * Parent microservice.
+     * Parent Aggregate.
      */
-    private String microserviceId;
+    private String aggregateId;
 
     /**
-     * Aggregate name.
+     * API name.
      */
     private String name;
 
     /**
-     * Aggregate description.
+     * Base REST path.
+     *
+     * Example:
+     * /customers
+     */
+    private String basePath;
+
+    /**
+     * Description.
      */
     private String description;
 

@@ -21,13 +21,13 @@ public class OpenApiConfiguration {
 
                 .info(new Info()
 
-                        .title("ASEP Identity API")
+                        .title("ASEP Contract API")
 
-                        .description("Authentication & Authorization APIs")
+                        .description("Contains all end points which are required for this platform")
 
                         .version("1.0.0")
 
-                        .contact(new Contact().name("ASEP").email("admin@asep.ai"))
+                        .contact(new Contact().name("Abhisek Ghosh").email("admin@asep.ai"))
 
                         .license(new License().name("Proprietary")))
 

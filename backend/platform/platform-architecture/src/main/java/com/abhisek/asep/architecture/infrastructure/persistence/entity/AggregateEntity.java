@@ -1,39 +1,31 @@
-package com.abhisek.asep.architecture.domain.model;
+package com.abhisek.asep.architecture.infrastructure.persistence.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
 
+@Entity
+@Table(name = "aggregates")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Aggregate {
+public class AggregateEntity {
 
-    /**
-     * Aggregate identifier.
-     */
+    @Id
     private String id;
 
-    /**
-     * Parent microservice.
-     */
+    @Column(nullable = false)
     private String microserviceId;
 
-    /**
-     * Aggregate name.
-     */
+    @Column(nullable = false)
     private String name;
 
-    /**
-     * Aggregate description.
-     */
+    @Column(columnDefinition = "TEXT")
     private String description;
 
-    /**
-     * Audit fields.
-     */
     private String createdBy;
 
     private Instant createdAt;
