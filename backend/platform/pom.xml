@@ -23,20 +23,15 @@
     <modules>
 
         <module>platform-common</module>
-
         <module>platform-core</module>
-
         <module>platform-identity</module>
-
         <module>platform-project</module>
-
         <module>platform-requirements</module>
-
         <module>platform-web</module>
-
         <module>platform-quality</module>
         <module>platform-ai</module>
         <module>platform-architecture</module>
+        <module>platform-generator</module>
 
     </modules>
 
