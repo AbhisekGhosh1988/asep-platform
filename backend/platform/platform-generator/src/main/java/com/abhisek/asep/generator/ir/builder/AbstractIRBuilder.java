@@ -1,40 +1,44 @@
 package com.abhisek.asep.generator.ir.builder;
 
-public abstract class AbstractIRBuilder<S, T> {
+import java.util.Objects;
 
-    public final T build(
-            S source) {
+/**
+ * Base implementation of every IR Builder.
+ *
+ * Provides:
+ *
+ * - null validation
+ * - common build flow
+ * - extension hooks
+ *
+ * @param <S> source model
+ * @param <T> target IR
+ */
+public abstract class AbstractIRBuilder<S, T>
+        implements IRBuilder<S, T> {
 
+    @Override
+    public final T build(S source) {
+
+        Objects.requireNonNull(
+                source,
+                IRBuilderConstants.NULL_SOURCE);
         validate(source);
 
-        T target = map(source);
-
-        enrich(target);
-
-        return target;
+        return doBuild(source);
 
     }
 
-    protected void validate(
-            S source) {
-
-        if (source == null) {
-
-            throw new IRBuilderException(
-                    "Source cannot be null.");
-
-        }
-
+    /**
+     * Optional validation hook.
+     */
+    protected void validate(S source) {
+        // default no-op
     }
 
-    protected abstract T map(
-            S source);
-
-    protected void enrich(
-            T target) {
-
-        // Default implementation
-
-    }
+    /**
+     * Actual mapping implementation.
+     */
+    protected abstract T doBuild(S source);
 
 }
