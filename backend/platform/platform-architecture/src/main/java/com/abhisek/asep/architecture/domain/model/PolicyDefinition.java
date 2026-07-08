@@ -9,7 +9,7 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiContract {
+public class PolicyDefinition {
 
     /**
      * Unique identifier.
@@ -22,22 +22,17 @@ public class ApiContract {
     private String aggregateId;
 
     /**
-     * API name.
+     * Policy name.
+     *
+     * Examples:
+     * DiscountPolicy
+     * ShippingPolicy
+     * RefundPolicy
      */
     private String name;
 
     /**
-     * Base REST path.
-     *
-     * Example:
-     * /customers
-     */
-    private String basePath;
-    private String method;
-    private String path;
-
-    /**
-     * Description.
+     * Business description.
      */
     private String description;
 

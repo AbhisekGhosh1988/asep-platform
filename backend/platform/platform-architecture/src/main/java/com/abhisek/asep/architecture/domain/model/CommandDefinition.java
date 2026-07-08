@@ -1,6 +1,10 @@
 package com.abhisek.asep.architecture.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
@@ -9,7 +13,7 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiContract {
+public class CommandDefinition {
 
     /**
      * Unique identifier.
@@ -22,22 +26,17 @@ public class ApiContract {
     private String aggregateId;
 
     /**
-     * API name.
+     * Command name.
+     *
+     * Examples:
+     * RegisterCustomerCommand
+     * PlaceOrderCommand
+     * CancelOrderCommand
      */
     private String name;
 
     /**
-     * Base REST path.
-     *
-     * Example:
-     * /customers
-     */
-    private String basePath;
-    private String method;
-    private String path;
-
-    /**
-     * Description.
+     * Business intent.
      */
     private String description;
 

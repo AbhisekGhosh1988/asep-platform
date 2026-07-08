@@ -1,6 +1,10 @@
 package com.abhisek.asep.architecture.domain.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.Instant;
 
@@ -9,7 +13,7 @@ import java.time.Instant;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiContract {
+public class FactoryDefinition {
 
     /**
      * Unique identifier.
@@ -17,24 +21,20 @@ public class ApiContract {
     private String id;
 
     /**
-     * Parent Aggregate.
+     * Aggregate Id.
      */
     private String aggregateId;
 
     /**
-     * API name.
+     * Factory name.
+     *
+     * Examples
+     *
+     * CustomerFactory
+     * OrderFactory
+     * InvoiceFactory
      */
     private String name;
-
-    /**
-     * Base REST path.
-     *
-     * Example:
-     * /customers
-     */
-    private String basePath;
-    private String method;
-    private String path;
 
     /**
      * Description.
@@ -42,7 +42,7 @@ public class ApiContract {
     private String description;
 
     /**
-     * Audit fields.
+     * Audit.
      */
     private String createdBy;
 
