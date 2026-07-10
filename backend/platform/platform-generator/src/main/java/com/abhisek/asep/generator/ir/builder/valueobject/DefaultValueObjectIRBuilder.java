@@ -2,15 +2,18 @@ package com.abhisek.asep.generator.ir.builder.valueobject;
 
 import com.abhisek.asep.generator.ir.builder.AbstractIRBuilder;
 import com.abhisek.asep.generator.ir.builder.BaseArtifactIRBuilder;
+import com.abhisek.asep.generator.ir.builder.attribute.AttributeIRBuilder;
 import com.abhisek.asep.generator.ir.model.ValueObjectIR;
 import com.abhisek.asep.generator.model.ValueObjectModel;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DefaultValueObjectIRBuilder
         extends BaseArtifactIRBuilder<ValueObjectModel, ValueObjectIR>
         implements ValueObjectIRBuilder {
-
+    private final AttributeIRBuilder attributeIRBuilder;
     @Override
     protected void validate(
             ValueObjectModel source) {
@@ -33,14 +36,21 @@ public class DefaultValueObjectIRBuilder
     }
 
     @Override
-    protected ValueObjectIR doBuild(
-            ValueObjectModel source) {
+    protected ValueObjectIR doBuild(ValueObjectModel source) {
 
-        return ValueObjectIR.builder()
-                .id(source.getId())
-                .name(source.getName())
-                .description(source.getDescription())
-                .build();
+        ValueObjectIR valueObject =
+                ValueObjectIR.builder()
+                        .id(source.getId())
+                        .name(source.getName())
+                        .description(source.getDescription())
+                        .build();
+
+        source.getAttributes()
+                .forEach(attribute ->
+                        valueObject.getAttributes().add(
+                                attributeIRBuilder.build(attribute)));
+
+        return valueObject;
 
     }
 

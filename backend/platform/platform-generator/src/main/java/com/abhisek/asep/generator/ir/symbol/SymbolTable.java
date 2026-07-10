@@ -1,46 +1,71 @@
 package com.abhisek.asep.generator.ir.symbol;
 
-import lombok.Getter;
-
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Getter
+/**
+ * Compiler symbol table.
+ */
 public class SymbolTable {
 
+    /**
+     * Registered compiler symbols.
+     */
     private final Map<String, Symbol> symbols =
             new LinkedHashMap<>();
 
-    public void register(
-            Symbol symbol) {
+    /**
+     * Register a symbol.
+     */
+    public void register(Symbol symbol) {
 
-        symbols.put(
-                symbol.getQualifiedName(),
-                symbol);
+        if (symbols.containsKey(symbol.getName())) {
 
-    }
+            throw new DuplicateSymbolException(symbol.getName());
 
-    public Optional<Symbol> find(
-            String qualifiedName) {
+        }
 
-        return Optional.ofNullable(
-                symbols.get(qualifiedName));
+        symbols.put(symbol.getName(), symbol);
 
     }
 
-    public boolean contains(
-            String qualifiedName) {
+    /**
+     * Lookup by name.
+     */
+    public Optional<Symbol> resolve(String name) {
 
-        return symbols.containsKey(
-                qualifiedName);
+        return Optional.ofNullable(symbols.get(name));
 
     }
 
-    public Collection<Symbol> getAll() {
+    /**
+     * Check existence.
+     */
+    public boolean contains(String name) {
 
-        return symbols.values();
+        return symbols.containsKey(name);
+
+    }
+
+    /**
+     * Total registered symbols.
+     */
+    public int size() {
+
+        return symbols.size();
+
+    }
+
+    /**
+     * Read-only symbols.
+     */
+    public Collection<Symbol> symbols() {
+
+        return Collections.unmodifiableCollection(
+                symbols.values());
 
     }
 

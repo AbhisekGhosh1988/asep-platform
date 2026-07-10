@@ -11,84 +11,87 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AggregateIR
-        extends BaseIRNode {
+public class AggregateIR extends BaseIRNode {
 
     /**
      * Entities.
      */
     @Builder.Default
-    private List<EntityIR> entities =
-            new ArrayList<>();
+    private List<EntityIR> entities = new ArrayList<>();
 
     /**
      * Value Objects.
      */
     @Builder.Default
-    private List<ValueObjectIR> valueObjects =
-            new ArrayList<>();
+    private List<ValueObjectIR> valueObjects = new ArrayList<>();
 
     /**
      * Repositories.
      */
     @Builder.Default
-    private List<RepositoryIR> repositories =
-            new ArrayList<>();
+    private List<RepositoryIR> repositories = new ArrayList<>();
 
     /**
      * Domain Services.
      */
     @Builder.Default
-    private List<DomainServiceIR> domainServices =
-            new ArrayList<>();
+    private List<DomainServiceIR> domainServices = new ArrayList<>();
 
     /**
      * Domain Events.
      */
     @Builder.Default
-    private List<DomainEventIR> domainEvents =
-            new ArrayList<>();
+    private List<DomainEventIR> domainEvents = new ArrayList<>();
 
     /**
      * API Contracts.
      */
     @Builder.Default
-    private List<ApiContractIR> apiContracts =
-            new ArrayList<>();
+    private List<ApiContractIR> apiContracts = new ArrayList<>();
 
     /**
      * Commands.
      */
     @Builder.Default
-    private List<CommandIR> commands =
-            new ArrayList<>();
+    private List<CommandIR> commands = new ArrayList<>();
 
     /**
      * Queries.
      */
     @Builder.Default
-    private List<QueryIR> queries =
-            new ArrayList<>();
+    private List<QueryIR> queries = new ArrayList<>();
 
     /**
      * Factories.
      */
     @Builder.Default
-    private List<FactoryIR> factories =
-            new ArrayList<>();
+    private List<FactoryIR> factories = new ArrayList<>();
 
     /**
      * Specifications.
      */
     @Builder.Default
-    private List<SpecificationIR> specifications =
-            new ArrayList<>();
+    private List<SpecificationIR> specifications = new ArrayList<>();
 
     /**
      * Policies.
      */
     @Builder.Default
-    private List<PolicyIR> policies =
-            new ArrayList<>();
+    private List<PolicyIR> policies = new ArrayList<>();
+
+    @Builder.Default
+    private List<UseCaseIR> useCases = new ArrayList<>();
+
+    /**
+     * DTOs.
+     */
+    @Builder.Default
+    private List<DtoIR> dtos = new ArrayList<>();
+
+    /**
+     * Mappers.
+     */
+    @Builder.Default
+    private List<MapperIR> mappers = new ArrayList<>();
 
 }

@@ -1,36 +1,32 @@
 package com.abhisek.asep.generator.ir.symbol;
 
-import lombok.AllArgsConstructor;
+import com.abhisek.asep.generator.ir.model.BaseIRNode;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 
+/**
+ * Compiler symbol.
+ *
+ * A symbol represents one named IR element registered
+ * during compiler analysis.
+ */
 @Getter
-@Setter
-@SuperBuilder
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 public class Symbol {
-
-    /**
-     * Unique Id.
-     */
-    private String id;
 
     /**
      * Symbol name.
      */
-    private String name;
+    private final String name;
 
     /**
      * Symbol type.
      */
-    private SymbolType type;
+    private final SymbolKind kind;
 
     /**
-     * Fully qualified name.
+     * Source IR node.
      */
-    private String qualifiedName;
+    private final BaseIRNode node;
 
 }

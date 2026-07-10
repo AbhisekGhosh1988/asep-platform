@@ -2,7 +2,7 @@ package com.abhisek.asep.generator.ir.builder;
 
 import com.abhisek.asep.generator.ir.model.ProjectIR;
 import com.abhisek.asep.generator.ir.symbol.SymbolTable;
-import com.abhisek.asep.generator.ir.type.TypeSystem;
+import com.abhisek.asep.generator.ir.type.TypeResolverImpl;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +25,6 @@ public class IRBuilderContext {
     /**
      * Compiler Type System.
      */
-    private TypeSystem typeSystem;
+    private TypeResolverImpl typeResolverImpl;
 
 }

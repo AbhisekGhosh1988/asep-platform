@@ -6,7 +6,23 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class CommandModel
-        extends BaseArtifactModel {
+@NoArgsConstructor
+@AllArgsConstructor
+public class CommandModel extends BaseArtifactModel {
+
+    /**
+     * Command handler.
+     */
+    private String handler;
+
+    /**
+     * Request DTO.
+     */
+    private String requestType;
+
+    /**
+     * Response DTO.
+     */
+    private String responseType;
 
 }

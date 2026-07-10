@@ -1,9 +1,6 @@
 package com.abhisek.asep.generator.ir.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Getter
@@ -11,12 +8,11 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ParameterIR
-        extends BaseIRNode {
+public class ParameterIR extends BaseIRNode {
 
     /**
-     * Parameter type.
+     * Java type.
      */
-    private String dataType;
+    private String type;
 
 }

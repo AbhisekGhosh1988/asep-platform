@@ -6,7 +6,14 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SpecificationModel
         extends BaseArtifactModel {
+
+    /**
+     * Entity this specification validates.
+     */
+    private String targetEntity;
 
 }

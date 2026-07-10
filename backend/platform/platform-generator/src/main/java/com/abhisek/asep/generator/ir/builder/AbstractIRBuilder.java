@@ -1,5 +1,7 @@
 package com.abhisek.asep.generator.ir.builder;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -40,5 +42,18 @@ public abstract class AbstractIRBuilder<S, T>
      * Actual mapping implementation.
      */
     protected abstract T doBuild(S source);
+
+    protected <S, T> List<T> buildAll(
+            Collection<S> source,
+            IRBuilder<S, T> builder) {
+
+        if (source == null || source.isEmpty()) {
+            return List.of();
+        }
+
+        return source.stream()
+                .map(builder::build)
+                .toList();
+    }
 
 }

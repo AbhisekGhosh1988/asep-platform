@@ -1,8 +1,10 @@
 package com.abhisek.asep.generator.compiler.context;
 
 import com.abhisek.asep.generator.compiler.diagnostic.DiagnosticCollector;
+import com.abhisek.asep.generator.compiler.pipeline.CompilerResult;
 import com.abhisek.asep.generator.ir.symbol.SymbolTable;
-import com.abhisek.asep.generator.ir.type.TypeSystem;
+import com.abhisek.asep.generator.ir.type.TypeRegistry;
+import com.abhisek.asep.generator.ir.type.TypeResolverImpl;
 import com.abhisek.asep.generator.model.ProjectGenerationModel;
 import lombok.*;
 
@@ -41,11 +43,15 @@ public class CompilerContext {
     /**
      * Type system.
      */
-    private TypeSystem typeSystem;
-
+    /**
+     * Registered compiler types.
+     */
+    private TypeRegistry typeRegistry;
     /**
      * Compilation statistics.
      */
     private CompilerStatistics statistics;
+
+    private CompilerResult compilerResult;
 
 }

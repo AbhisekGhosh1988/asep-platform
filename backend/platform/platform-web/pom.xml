@@ -95,6 +95,11 @@
             <artifactId>spring-modulith-docs</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.abhisek.asep</groupId>
+            <artifactId>platform-generator</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

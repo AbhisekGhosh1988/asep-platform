@@ -2,7 +2,9 @@ package com.abhisek.asep.generator.compiler.context;
 
 import com.abhisek.asep.generator.compiler.diagnostic.DiagnosticCollector;
 import com.abhisek.asep.generator.ir.symbol.SymbolTable;
-import com.abhisek.asep.generator.ir.type.DefaultTypeSystem;
+import com.abhisek.asep.generator.ir.type.TypeKind;
+import com.abhisek.asep.generator.ir.type.TypeRegistry;
+import com.abhisek.asep.generator.ir.type.TypeResolverImpl;
 import com.abhisek.asep.generator.model.ProjectGenerationModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CompilerContextFactory {
 
-    private final DefaultTypeSystem typeSystem;
 
     private final DiagnosticCollector diagnostics;
 
@@ -30,7 +31,7 @@ public class CompilerContextFactory {
                                 .build())
                 .diagnostics(diagnostics)
                 .symbolTable(new SymbolTable())
-                .typeSystem(typeSystem)
+                .typeRegistry(new TypeRegistry())
                 .statistics(
                         CompilerStatistics.builder()
                                 .startedAt(System.currentTimeMillis())

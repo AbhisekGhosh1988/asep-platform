@@ -9,4 +9,5 @@ import lombok.experimental.SuperBuilder;
 public class RepositoryModel
         extends BaseArtifactModel {
 
+
 }
