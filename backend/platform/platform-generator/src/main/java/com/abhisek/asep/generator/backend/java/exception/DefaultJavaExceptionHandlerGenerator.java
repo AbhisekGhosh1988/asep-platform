@@ -33,15 +33,87 @@ public class DefaultJavaExceptionHandlerGenerator extends AbstractJavaArtifactGe
     @Override
     public void generate(GenerationTask step, CompilerResult compilerResult, GenerationContext generationContext) {
 
+        generateGlobalExceptionHandler(generationContext);
+
+        generateApiErrorResponse(generationContext);
+
+        generateValidationErrorResponse(generationContext);
+
+        generateBusinessException(generationContext);
+
+        generateResourceNotFoundException(generationContext);
+
+        log.info("Generated Exception Framework");
+
+    }
+
+    private void generateGlobalExceptionHandler(GenerationContext generationContext) {
+
+        String packageName = generationContext.getBasePackage() + ".interfaces.rest.exception";
+
         Template template = loadTemplate("global-exception-handler.java.tpl");
 
-        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".interfaces.rest.exception");
+        TemplateContext context = new TemplateContext().put("package", packageName);
 
         String source = render(template, context);
 
-        writeSource(resolveJavaFile(generationContext, generationContext.getBasePackage() + ".interfaces.rest.exception", "GlobalExceptionHandler"), source);
+        writeSource(resolveJavaFile(generationContext, packageName, "GlobalExceptionHandler"), source);
 
-        log.info("Generated GlobalExceptionHandler");
+    }
+
+    private void generateApiErrorResponse(GenerationContext generationContext) {
+
+        String packageName = generationContext.getBasePackage() + ".interfaces.rest.exception";
+
+        Template template = loadTemplate("api-error-response.java.tpl");
+
+        TemplateContext context = new TemplateContext().put("package", packageName);
+
+        String source = render(template, context);
+
+        writeSource(resolveJavaFile(generationContext, packageName, "ApiErrorResponse"), source);
+
+    }
+
+    private void generateValidationErrorResponse(GenerationContext generationContext) {
+
+        String packageName = generationContext.getBasePackage() + ".interfaces.rest.exception";
+
+        Template template = loadTemplate("validation-error-response.java.tpl");
+
+        TemplateContext context = new TemplateContext().put("package", packageName);
+
+        String source = render(template, context);
+
+        writeSource(resolveJavaFile(generationContext, packageName, "ValidationErrorResponse"), source);
+
+    }
+
+    private void generateBusinessException(GenerationContext generationContext) {
+
+        String packageName = generationContext.getBasePackage() + ".interfaces.rest.exception";
+
+        Template template = loadTemplate("business-exception.java.tpl");
+
+        TemplateContext context = new TemplateContext().put("package", packageName);
+
+        String source = render(template, context);
+
+        writeSource(resolveJavaFile(generationContext, packageName, "BusinessException"), source);
+
+    }
+
+    private void generateResourceNotFoundException(GenerationContext generationContext) {
+
+        String packageName = generationContext.getBasePackage() + ".interfaces.rest.exception";
+
+        Template template = loadTemplate("resource-not-found-exception.java.tpl");
+
+        TemplateContext context = new TemplateContext().put("package", packageName);
+
+        String source = render(template, context);
+
+        writeSource(resolveJavaFile(generationContext, packageName, "ResourceNotFoundException"), source);
 
     }
 

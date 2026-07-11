@@ -42,8 +42,7 @@ public class DefaultJavaMapperGenerator extends AbstractJavaArtifactGenerator im
 
         Template template = loadTemplate("mapper.java.tpl");
 
-        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".application.mapper").put("className", mapper.getName()).put("entityClass", mapper.getEntity()).put("dtoClass", mapper.getDto());
-
+        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".application.mapper").put("entityPackage", generationContext.getBasePackage() + ".domain.entity").put("dtoPackage", generationContext.getBasePackage() + ".application.dto").put("className", mapper.getName()).put("entityClass", mapper.getEntity()).put("dtoClass", mapper.getDto());
         String source = render(template, context);
 
         writeSource(resolveJavaFile(generationContext, generationContext.getBasePackage() + ".application.mapper", mapper.getName()), source);

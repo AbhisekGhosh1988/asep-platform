@@ -6,7 +6,7 @@ import com.abhisek.asep.generator.model.ApiContractModel;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApiContractIRBuilderImpl
+public class DefaultApiContractIRBuilder
         extends BaseArtifactIRBuilder<ApiContractModel, ApiContractIR>
         implements ApiContractIRBuilder {
 
@@ -51,8 +51,8 @@ public class ApiContractIRBuilderImpl
                 .path(source.getPath())
 
                 // Populated during DTO generation
-                .requestType(null)
-                .responseType(null)
+                .requestType(source.getRequestType())
+                .responseType(source.getResponseType())
 
                 .build();
 

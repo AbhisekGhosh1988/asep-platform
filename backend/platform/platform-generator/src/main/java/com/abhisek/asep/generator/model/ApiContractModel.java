@@ -8,11 +8,26 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiContractModel
-        extends BaseArtifactModel {
+public class ApiContractModel extends BaseArtifactModel {
 
+    /**
+     * HTTP Method.
+     */
     private String method;
 
+    /**
+     * REST Path.
+     */
     private String path;
+
+    /**
+     * Request DTO.
+     */
+    private String requestType;
+
+    /**
+     * Response DTO.
+     */
+    private String responseType;
 
 }

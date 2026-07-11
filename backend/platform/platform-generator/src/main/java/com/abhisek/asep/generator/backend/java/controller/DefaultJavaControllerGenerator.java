@@ -38,17 +38,35 @@ public class DefaultJavaControllerGenerator extends AbstractJavaArtifactGenerato
             return;
         }
 
-        Template template = loadTemplate("controller.java.tpl");
+        String packageName = generationContext.getBasePackage() + ".interfaces.rest";
 
         String controllerName = api.getName() + "Controller";
 
         String useCase = api.getName() + "UseCase";
 
-        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".interfaces.rest").put("className", controllerName).put("requestMapping", api.getPath()).put("httpMethod", api.getHttpMethod()).put("requestType", api.getRequestType()).put("responseType", api.getResponseType()).put("useCase", useCase);
+        String useCaseField = Character.toLowerCase(useCase.charAt(0)) + useCase.substring(1);
+
+        String mappingAnnotation = switch (api.getHttpMethod().toUpperCase()) {
+
+            case "POST" -> "Post";
+
+            case "PUT" -> "Put";
+
+            case "DELETE" -> "Delete";
+
+            case "PATCH" -> "Patch";
+
+            default -> "Get";
+
+        };
+
+        Template template = loadTemplate("controller.java.tpl");
+
+        TemplateContext context = new TemplateContext().put("package", packageName).put("className", controllerName).put("requestMapping", api.getPath()).put("mappingAnnotation", mappingAnnotation).put("requestType", api.getRequestType()).put("responseType", api.getResponseType()).put("useCase", useCase).put("useCaseField", useCaseField);
 
         String source = render(template, context);
 
-        writeSource(resolveJavaFile(generationContext, generationContext.getBasePackage() + ".interfaces.rest", controllerName), source);
+        writeSource(resolveJavaFile(generationContext, packageName, controllerName), source);
 
         log.info("Generated Controller {}", controllerName);
 

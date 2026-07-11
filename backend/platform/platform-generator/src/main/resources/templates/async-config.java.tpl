@@ -1,6 +1,7 @@
 package ${package};
 
-import lombok.*;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * --------------------------------------------------------------------
@@ -8,13 +9,8 @@ import lombok.*;
  * DO NOT MODIFY MANUALLY.
  * --------------------------------------------------------------------
  */
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ${className} {
-
-${fields}
+@Configuration
+@EnableAsync
+public class AsyncConfig {
 
 }

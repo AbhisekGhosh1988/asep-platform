@@ -65,5 +65,11 @@ public abstract class AbstractJavaArtifactGenerator implements ArtifactGenerator
 
     }
 
+    protected Path resolveJavaTestFile(GenerationContext generationContext, String packageName, String className) {
+
+        return generationContext.resolveJavaTestFile(packageName, className);
+
+    }
+
 
 }

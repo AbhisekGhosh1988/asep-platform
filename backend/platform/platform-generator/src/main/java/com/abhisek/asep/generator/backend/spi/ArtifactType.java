@@ -47,5 +47,5 @@ public enum ArtifactType {
 
     EXCEPTION_HANDLER,
 
-    UNIT_TEST
+    TEST, UNIT_TEST
 }

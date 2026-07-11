@@ -60,10 +60,9 @@ public class DefaultJavaUseCaseGenerator extends AbstractJavaArtifactGenerator i
 
     private void generateImplementation(UseCaseIR useCase, GenerationContext generationContext) {
 
-        Template template = loadTemplate("templates/usecase-impl.java.tpl");
+        Template template = loadTemplate("usecase-impl.java.tpl");
 
-        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".application.usecase.impl").put("className", useCase.getName() + "Impl").put("interfaceName", useCase.getName()).put("requestType", useCase.getRequestDto()).put("responseType", useCase.getResponseDto());
-
+        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".application.usecase.impl").put("className", useCase.getName() + "Impl").put("interfaceName", useCase.getName()).put("requestType", useCase.getRequestDto()).put("responseType", useCase.getResponseDto()).put("dependencies", "").put("body", "        throw new UnsupportedOperationException(\"Generated use case - implementation pending.\");");
         String source = render(template, context);
 
         writeSource(resolveJavaFile(generationContext, generationContext.getBasePackage() + ".application.usecase.impl", useCase.getName() + "Impl"), source);

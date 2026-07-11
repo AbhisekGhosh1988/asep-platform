@@ -1,29 +1,46 @@
 package com.abhisek.asep.generator.ir.builder.dto;
 
-import com.abhisek.asep.generator.ir.model.AttributeIR;
+import com.abhisek.asep.generator.ir.builder.BaseArtifactIRBuilder;
+import com.abhisek.asep.generator.ir.builder.attribute.AttributeIRBuilder;
 import com.abhisek.asep.generator.ir.model.DtoIR;
-import com.abhisek.asep.generator.model.AttributeModel;
 import com.abhisek.asep.generator.model.DtoModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
-
 @Component
 @RequiredArgsConstructor
-public class DefaultDtoIRBuilder implements DtoIRBuilder {
+public class DefaultDtoIRBuilder extends BaseArtifactIRBuilder<DtoModel, DtoIR> implements DtoIRBuilder {
+
+    private final AttributeIRBuilder attributeIRBuilder;
 
     @Override
-    public DtoIR build(DtoModel source) {
+    protected void validate(DtoModel source) {
 
-        return DtoIR.builder().id(source.getId()).name(source.getName()).description(source.getDescription()).type(com.abhisek.asep.generator.ir.model.DtoType.valueOf(source.getType().name())).attributes(source.getAttributes().stream().map(this::toAttributeIR).collect(Collectors.toList())).build();
+        super.validate(source);
+
+        if (source.getName() == null || source.getName().isBlank()) {
+
+            throw new IllegalArgumentException("DTO name cannot be null or blank.");
+
+        }
 
     }
 
-    private AttributeIR toAttributeIR(AttributeModel source) {
+    @Override
+    protected String getArtifactType() {
 
-        return AttributeIR.builder().name(source.getName()).dataType(source.getDataType()).nullable(source.isNullable()).
-                identifier(source.isIdentifier()).unique(true).build();
+        return "DTO";
+
+    }
+
+    @Override
+    protected DtoIR doBuild(DtoModel source) {
+
+        DtoIR dto = DtoIR.builder().id(source.getId()).name(source.getName()).description(source.getDescription()).type(source.getType()).build();
+
+        source.getAttributes().forEach(attribute -> dto.getAttributes().add(attributeIRBuilder.build(attribute)));
+
+        return dto;
 
     }
 

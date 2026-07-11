@@ -10,8 +10,15 @@ import org.springframework.stereotype.Component;
 public class UseCaseIRBuilderImpl implements UseCaseIRBuilder {
 
     @Override
-    public UseCaseIR build(
-            UseCaseModel source) {
+    public UseCaseIR build(UseCaseModel source) {
+
+        if (source == null) {
+            throw new IllegalArgumentException("UseCaseModel cannot be null.");
+        }
+
+        if (source.getType() == null) {
+            throw new IllegalArgumentException("UseCase type cannot be null.");
+        }
 
         return UseCaseIR.builder()
                 .id(source.getId())

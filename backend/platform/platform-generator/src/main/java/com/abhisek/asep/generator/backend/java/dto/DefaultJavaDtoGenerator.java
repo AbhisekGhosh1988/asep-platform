@@ -69,7 +69,7 @@ public class DefaultJavaDtoGenerator extends AbstractJavaArtifactGenerator imple
 
         for (AttributeIR attribute : dto.getAttributes()) {
 
-            builder.append("    private ").append(attribute.getDataType()).append(" ").append(attribute.getName()).append(";\n\n");
+            builder.append("    /**\n").append("     * ").append(attribute.getDescription() == null ? attribute.getName() : attribute.getDescription()).append("\n").append("     */\n").append("    private ").append(attribute.getDataType()).append(" ").append(attribute.getName()).append(";\n\n");
 
         }
 

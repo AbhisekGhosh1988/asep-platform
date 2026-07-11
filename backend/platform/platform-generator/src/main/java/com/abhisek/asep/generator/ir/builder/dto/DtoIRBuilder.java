@@ -5,7 +5,6 @@ import com.abhisek.asep.generator.model.DtoModel;
 
 public interface DtoIRBuilder {
 
-    DtoIR build(
-            DtoModel source);
+    DtoIR build(DtoModel source);
 
 }

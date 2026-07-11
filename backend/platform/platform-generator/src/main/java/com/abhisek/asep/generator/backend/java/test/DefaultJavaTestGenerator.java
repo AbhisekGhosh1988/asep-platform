@@ -10,7 +10,6 @@ import com.abhisek.asep.generator.backend.template.TemplateRepository;
 import com.abhisek.asep.generator.backend.writer.SourceWriter;
 import com.abhisek.asep.generator.compiler.pipeline.CompilerResult;
 import com.abhisek.asep.generator.compiler.planner.GenerationTask;
-import com.abhisek.asep.generator.ir.model.EntityIR;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -29,33 +28,70 @@ public class DefaultJavaTestGenerator extends AbstractJavaArtifactGenerator impl
     @Override
     public ArtifactType getArtifactType() {
 
-        return ArtifactType.UNIT_TEST;
+        return ArtifactType.TEST;
 
     }
 
     @Override
     public void generate(GenerationTask step, CompilerResult compilerResult, GenerationContext generationContext) {
 
-        if (!(step.getNode() instanceof EntityIR entity)) {
-            return;
-        }
+        generateBaseIntegrationTest(generationContext);
 
-        Template template = loadTemplate("entity-test.java.tpl");
+        generateAbstractControllerTest(generationContext);
 
-        TemplateContext context = new TemplateContext().put("package", generationContext.getBasePackage() + ".test").put("className", entity.getName());
+        generateAbstractServiceTest(generationContext);
+
+        generateAbstractRepositoryTest(generationContext);
+
+        generateTestDataFactory(generationContext);
+
+        log.info("Generated Test Infrastructure");
+
+    }
+
+    private void generateBaseIntegrationTest(GenerationContext generationContext) {
+
+        generateFile(generationContext, "base-integration-test.java.tpl", "BaseIntegrationTest");
+
+    }
+
+    private void generateAbstractControllerTest(GenerationContext generationContext) {
+
+        generateFile(generationContext, "abstract-controller-test.java.tpl", "AbstractControllerTest");
+
+    }
+
+    private void generateAbstractServiceTest(GenerationContext generationContext) {
+
+        generateFile(generationContext, "abstract-service-test.java.tpl", "AbstractServiceTest");
+
+    }
+
+    private void generateAbstractRepositoryTest(GenerationContext generationContext) {
+
+        generateFile(generationContext, "abstract-repository-test.java.tpl", "AbstractRepositoryTest");
+
+    }
+
+    private void generateTestDataFactory(GenerationContext generationContext) {
+
+        generateFile(generationContext, "test-data-factory.java.tpl", "TestDataFactory");
+
+    }
+
+    private void generateFile(GenerationContext generationContext, String templateName, String className) {
+
+        String packageName = generationContext.getBasePackage() + ".test";
+
+        Template template = loadTemplate(templateName);
+
+        TemplateContext context = new TemplateContext().put("package", packageName);
 
         String source = render(template, context);
 
-        writeSource(resolveJavaTestFile(generationContext, generationContext.getBasePackage() + ".test", entity.getName() + "Test"), source);
-
-        log.info("Generated Unit Test {}", entity.getName());
+        writeSource(resolveJavaTestFile(generationContext, packageName, className), source);
 
     }
 
-    protected Path resolveJavaTestFile(GenerationContext context, String packageName, String className) {
-
-        return context.resolveJavaTestFile(packageName, className);
-
-    }
 
 }
